@@ -10,9 +10,7 @@ import { Store } from 'react-redux';
 import { createStore } from 'redux';
 import { GlobalState } from './types/index';
 import { setItemReducer } from './reducers/setItemReducer';
-import { setItems, addItems, setClasses, setMods } from './actions';
-import IProfession from './interfaces/IProfession';
-import IMod from './interfaces/IMod';
+import { setItems, addItems } from './actions';
 
 /// https://redux.js.org/docs/api/combineReducers.html
 const enhancer = window['devToolsExtension'] ? window['devToolsExtension']()(createStore) : createStore;
@@ -20,9 +18,6 @@ const enhancer = window['devToolsExtension'] ? window['devToolsExtension']()(cre
 const store: Store<GlobalState> = enhancer(setItemReducer, {
   clickCounter: 1,
   items: [],
-  classes: [],
-  mods: [],
-  selectedMod: {} as IMod,
   isLoading: false
 });
 
@@ -35,15 +30,11 @@ declare abstract class data {
   public static globalStore: {};
   public static globalSetItems(items: IItem[]): {};
   public static globalAddItems(items: IItem[]): {};
-  public static globalSetClasses(classes: IProfession[]): {};
-  public static globalSetMods(mods: IMod[]): {};
 }
 if (typeof data === 'object') {
   data.globalStore = store;
   data.globalSetItems = setItems;
   data.globalAddItems = addItems;
-  data.globalSetClasses = setClasses;
-  data.globalSetMods = setMods;
 }
 /* == END MAGIC == */
 
