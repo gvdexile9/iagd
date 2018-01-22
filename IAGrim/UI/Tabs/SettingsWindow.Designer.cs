@@ -50,7 +50,6 @@
             this.radioBeta = new FirefoxRadioButton();
             this.radioRelease = new FirefoxRadioButton();
             this.panelBox2 = new PanelBox();
-            this.buttonDonate = new FirefoxButton();
             this.buttonForum = new FirefoxButton();
             this.buttonDeveloper = new FirefoxButton();
             this.panelBox1 = new PanelBox();
@@ -417,7 +416,6 @@
             // 
             // panelBox2
             // 
-            this.panelBox2.Controls.Add(this.buttonDonate);
             this.panelBox2.Controls.Add(this.buttonForum);
             this.panelBox2.Controls.Add(this.buttonDeveloper);
             this.panelBox2.Font = new System.Drawing.Font("Segoe UI Semibold", 20F);
@@ -430,19 +428,6 @@
             this.panelBox2.Tag = "iatag_ui_misc_title";
             this.panelBox2.Text = "Misc";
             this.panelBox2.TextLocation = "8; 5";
-            // 
-            // buttonDonate
-            // 
-            this.buttonDonate.EnabledCalc = true;
-            this.buttonDonate.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.buttonDonate.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(56)))), ((int)(((byte)(68)))), ((int)(((byte)(80)))));
-            this.buttonDonate.Location = new System.Drawing.Point(14, 127);
-            this.buttonDonate.Name = "buttonDonate";
-            this.buttonDonate.Size = new System.Drawing.Size(192, 32);
-            this.buttonDonate.TabIndex = 5;
-            this.buttonDonate.Tag = "iatag_ui_donatenow";
-            this.buttonDonate.Text = "Donate Now!";
-            this.buttonDonate.Click += new System.EventHandler(this.buttonDonate_Click);
             // 
             // buttonForum
             // 
@@ -613,7 +598,6 @@
         private FirefoxRadioButton radioBeta;
         private FirefoxRadioButton radioRelease;
         private PanelBox panelBox5;
-        private FirefoxButton buttonDonate;
         private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem copyToolStripMenuItem;

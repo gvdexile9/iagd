@@ -14,11 +14,9 @@ using IAGrim.Utilities;
 using log4net;
 
 namespace IAGrim.Parsers.Arz {
-    public class ArzParser : IDisposable {
+    public class ArzParser {
         private static readonly ILog Logger = LogManager.GetLogger(typeof(ArzParser));
         private readonly IDatabaseSettingDao _databaseSettingDao;
-        private readonly List<DatabaseItem> _skills = new List<DatabaseItem>();
-        private ISet<ItemTag> _tags;
 
         public ArzParser(IDatabaseSettingDao databaseSettingDao) {
             _databaseSettingDao = databaseSettingDao;
@@ -266,9 +264,6 @@ namespace IAGrim.Parsers.Arz {
                 else
                     break;
             }
-        }
-        public void Dispose() {
-            _skills.Clear();
         }
     }
 }

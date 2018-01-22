@@ -22,8 +22,6 @@ namespace IAGrim.UI.Controller {
 
         void BindText(System.Windows.Forms.Control control, string property);
 
-        void DonateNow();
-
         void OpenDataFolder();
 
 

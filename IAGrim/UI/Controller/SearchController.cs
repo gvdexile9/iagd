@@ -104,7 +104,7 @@ namespace IAGrim.UI.Controller {
 
             if (!JsBind.ItemSourceExhausted) {
                 if (ApplyItems()) {
-                    Browser.LoadItems();
+                    Browser.AddItems();
                 }
             }
         }

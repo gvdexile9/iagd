@@ -18,6 +18,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using IAGrim.Database.Interfaces;
 using IAGrim.Services;
+using IAGrim.UI.Misc.CEF;
 
 namespace IAGrim.UI.Controller {
     class ItemTransferController {
@@ -28,23 +29,23 @@ namespace IAGrim.UI.Controller {
         private readonly ISettingsReadController _settingsController;
         private readonly SearchWindow _searchWindow;
         private readonly DynamicPacker _dynamicPacker;
-        private readonly CefBrowserHandler _browser;
+        private readonly IUserFeedbackHandler _browser;
         private readonly StashManager _stashManager;
         private readonly ItemStatService _itemStatService;
 
         public ItemTransferController(
-                CefBrowserHandler browser,
-                Action<string> feedback,
-                Action<string> setTooltip,
-                ISettingsReadController settingsController,
-                SearchWindow searchWindow,
-                DynamicPacker dynamicPacker,
-                IPlayerItemDao playerItemDao,
-                StashManager stashManager,
-                ItemStatService itemStatService
-            ) {
+            IUserFeedbackHandler browser,
+            Action<string> setFeedback,
+            Action<string> setTooltip,
+            ISettingsReadController settingsController,
+            SearchWindow searchWindow,
+            DynamicPacker dynamicPacker,
+            IPlayerItemDao playerItemDao,
+            StashManager stashManager,
+            ItemStatService itemStatService
+        ) {
             this._browser = browser;
-            this._setFeedback = feedback;
+            this._setFeedback = setFeedback;
             this._setTooltip = setTooltip;
             this._settingsController = settingsController;
             this._searchWindow = searchWindow;
@@ -79,7 +80,7 @@ namespace IAGrim.UI.Controller {
                 Logger.Warn("Attempted to transfer NULL item.");
 
                 var message = GlobalSettings.Language.GetTag("iatag_feedback_item_does_not_exist");
-                _setFeedback(GlobalSettings.Language.GetTag("iatag_feedback_item_does_not_exist"));
+                _browser.ShowMessage(GlobalSettings.Language.GetTag("iatag_feedback_item_does_not_exist"));
                 // 
                 // 
                 _browser.ShowMessage(message, "Error");
@@ -100,19 +101,19 @@ namespace IAGrim.UI.Controller {
         }
 
         private TransferStatus TransferItems(string transferFile, List<PlayerItem> items, int maxItemsToTransfer) {
-        
+
             // Remove all items deposited (may or may not be less than the requested amount, if no inventory space is available)
             string error;
             int numItemsReceived = (int)items.Sum(item => Math.Max(1, item.StackCount));
             int numItemsRequested = Math.Min(maxItemsToTransfer, numItemsReceived);
-            
+
 
             _itemStatService.ApplyStatsToPlayerItems(items); // For item class? 'IsStackable' maybe?
             _stashManager.Deposit(transferFile, items, maxItemsToTransfer, out error);
             _dao.Update(items, true);
 
 
-            int NumItemsTransferred = numItemsRequested - (numItemsRequested - (int)items.Sum(item => Math.Max(1, item.StackCount)));
+            int numItemsTransferred = numItemsRequested - (numItemsRequested - (int)items.Sum(item => Math.Max(1, item.StackCount)));
 
             if (!string.IsNullOrEmpty(error)) {
                 Logger.Warn(error);
@@ -120,7 +121,7 @@ namespace IAGrim.UI.Controller {
             }
 
             return new TransferStatus {
-                NumItemsTransferred = NumItemsTransferred,
+                NumItemsTransferred = numItemsTransferred,
                 NumItemsRequested = numItemsRequested
             };
         }
@@ -150,13 +151,13 @@ namespace IAGrim.UI.Controller {
 
         private bool CanTransfer() {
             return GlobalSettings.StashStatus == StashAvailability.CLOSED
-                || !_settingsController.SecureTransfers
-                || (GlobalSettings.StashStatus == StashAvailability.ERROR 
-                    && MessageBox.Show(
-                        GlobalSettings.Language.GetTag("iatag_stash_status_error"),
-                        "Warning",
-                        MessageBoxButtons.YesNo,
-                        MessageBoxIcon.Warning) == DialogResult.Yes);
+                   || !_settingsController.SecureTransfers
+                   || (GlobalSettings.StashStatus == StashAvailability.ERROR
+                       && MessageBox.Show(
+                           GlobalSettings.Language.GetTag("iatag_stash_status_error"),
+                           "Warning",
+                           MessageBoxButtons.YesNo,
+                           MessageBoxIcon.Warning) == DialogResult.Yes);
 
         }
 
@@ -179,7 +180,7 @@ namespace IAGrim.UI.Controller {
                     }
 
                     Logger.Debug($"Found {items.Count} items to transfer");
-                    var result = TransferItems(file, items, (int) args.Count);
+                    var result = TransferItems(file, items, (int)args.Count);
 
 
                     Logger.InfoFormat("Successfully deposited {0} out of {1} items", result.NumItemsTransferred,
@@ -213,7 +214,7 @@ namespace IAGrim.UI.Controller {
                 // "InstaTransfer" is an experimental feature
                 if (Properties.Settings.Default.InstaTransfer) { // disabled for now
 
-                    
+
                     List<PlayerItem> items = GetItemsForTransfer(args);
                     int numDepositedItems = 0;
                     int numItemsToTransfer = items?.Count ?? 0;
@@ -290,7 +291,8 @@ namespace IAGrim.UI.Controller {
                 // If that is not acceptable specify a maximum waiting time (in ms)
                 try {
                     pipeStream.Connect(250);
-                } catch (TimeoutException) {
+                }
+                catch (TimeoutException) {
                     return false;
                 }
 

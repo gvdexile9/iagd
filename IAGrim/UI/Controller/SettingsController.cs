@@ -205,13 +205,6 @@ namespace IAGrim.UI.Controller {
             control.DataBindings.Add(new Binding("Text", this, property));
         }
 
-        public void DonateNow() {
-            System.Diagnostics.Process.Start("http://grimdawn.dreamcrash.org/ia/?donate");
-            DateTime dt = DateTime.Now.AddDays(new Random().Next(14,25));
-            Properties.Settings.Default.LastNagTimestamp = dt.Ticks;
-            Properties.Settings.Default.Save();
-        }
-
         public void OpenDataFolder() {
             String appdata = Environment.GetEnvironmentVariable("LocalAppData");
             string dir = Path.Combine(appdata, "EvilSoft", "IAGD", "backup");

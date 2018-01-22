@@ -302,6 +302,10 @@
     </Compile>
     <Compile Include="Theme\ScrollPanelMessageFilter.cs" />
     <Compile Include="Theme\Theme.cs" />
+    <Compile Include="UI\Misc\CEF\CefRequestHandler.cs" />
+    <Compile Include="UI\Misc\CEF\ItemTransferEvent.cs" />
+    <Compile Include="UI\Misc\CEF\IUserFeedbackHandler.cs" />
+    <Compile Include="UI\Misc\CEF\SetZoomEvent.cs" />
     <Compile Include="UI\Misc\HtmlTranslation.cs" />
     <Compile Include="UI\Misc\RequestRecipeArgument.cs" />
     <Compile Include="UI\Misc\TextboxHoverFocusHighlight.cs" />
@@ -376,12 +380,6 @@
     <Compile Include="UI\DesiredSkills.Designer.cs">
       <DependentUpon>DesiredSkills.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Popups\DonateNagScreen.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="UI\Popups\DonateNagScreen.Designer.cs">
-      <DependentUpon>DonateNagScreen.cs</DependentUpon>
-    </Compile>
     <Compile Include="UI\Tabs\HelpTab.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -394,7 +392,7 @@
     <Compile Include="UI\Popups\LanguagePackPicker.Designer.cs">
       <DependentUpon>LanguagePackPicker.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Misc\CefBrowserHandler.cs" />
+    <Compile Include="UI\Misc\CEF\CefBrowserHandler.cs" />
     <Compile Include="UI\Misc\ClipboardEventArg.cs" />
     <Compile Include="UI\Misc\JSWrapper.cs" />
     <Compile Include="UI\Misc\MessageType.cs" />
@@ -535,9 +533,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\DesiredSkills.resx">
       <DependentUpon>DesiredSkills.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\Popups\DonateNagScreen.resx">
-      <DependentUpon>DonateNagScreen.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Tabs\HelpTab.resx">
       <DependentUpon>HelpTab.cs</DependentUpon>

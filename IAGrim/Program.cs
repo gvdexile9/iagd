@@ -133,7 +133,7 @@ namespace IAGrim {
                 return;
             }
 #endif
-            //ParsingUIBackgroundWorker tmp = new ParsingUIBackgroundWorker();
+            ItemHtmlWriter.CopyMissingFiles();
 
             Guid guid = new Guid("{F3693953-C090-4F93-86A2-B98AB96A9368}");
             using (SingleInstance singleInstance = new SingleInstance(guid)) {
@@ -364,11 +364,7 @@ namespace IAGrim {
                 }
 
                 playerItemDao.UpdateHardcoreSettings();
-
                 _mw.Visible = false;
-                if (DonateNagScreen.CanNag)
-                    Application.Run(new DonateNagScreen());
-
                 Logger.Info("Running the main application..");
 
 

@@ -10,17 +10,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using IAGrim.UI.Misc.CEF;
 
 namespace IAGrim.UI.Misc {
-    public class CefBrowserHandler : IDisposable {
+    public class CefBrowserHandler : IUserFeedbackHandler, IDisposable {
         private static readonly ILog Logger = LogManager.GetLogger(typeof(CefBrowserHandler));
         private ChromiumWebBrowser _browser;
+        public event EventHandler TransferSingleRequested;
+        public event EventHandler TransferAllRequested;
 
-        public Control BrowserControl {
-            get {
-                return _browser;
-            }
-        }
+        public ChromiumWebBrowser BrowserControl => _browser;
 
         private object lockObj = new object();
 
@@ -47,9 +46,10 @@ namespace IAGrim.UI.Misc {
             if (_browser.IsBrowserInitialized)
                 _browser.ExecuteScriptAsync("isLoading(true);");
         }
+
         public void RefreshItems() {
             if (_browser.IsBrowserInitialized) {
-                _browser.ExecuteScriptAsync("refreshData();");
+                _browser.ExecuteScriptAsync("data.globalStore.dispatch(data.globalSetItems(JSON.parse(data.Items)));");
             }
             else {
                 Logger.Warn("Attempted to update items but CEF not yet initialized.");
@@ -66,9 +66,9 @@ namespace IAGrim.UI.Misc {
         }
         
 
-        public void LoadItems() {
+        public void AddItems() {
             if (_browser.IsBrowserInitialized) {
-                _browser.ExecuteScriptAsync("addData();");
+                _browser.ExecuteScriptAsync("data.globalStore.dispatch(data.globalAddItems(data.Items));");
             }
             else {
                 Logger.Warn("Attempted to update items but CEF not yet initialized.");
@@ -85,6 +85,10 @@ namespace IAGrim.UI.Misc {
             }
         }
 
+        public void ShowMessage(string message) {
+            ShowMessage(message, "Info");
+        }
+
         public void InitializeChromium(object bindeable, EventHandler<IsBrowserInitializedChangedEventArgs> Browser_IsBrowserInitializedChanged) {
             try {
                 Logger.Info("Creating Chromium instance..");
@@ -98,18 +102,16 @@ namespace IAGrim.UI.Misc {
                         MessageBoxIcon.Error);
                 }
 
-                try {
-                    string src = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "resources", "item-kjs.html");
-                    File.Copy(src, GlobalPaths.ItemsHtmlFile, true);
-                } catch (Exception ex) {
-                    // Probably doesn't matter, only relevant if its been updated
-                    Logger.Warn(ex.Message);
-                    Logger.Warn(ex.StackTrace);
-                }
-
                 _browser = new ChromiumWebBrowser(GlobalPaths.ItemsHtmlFile);
                 _browser.RegisterJsObject("data", bindeable, false);
                 _browser.IsBrowserInitializedChanged += Browser_IsBrowserInitializedChanged;
+
+                var requestInterceptor = new CefRequestHandler();
+                requestInterceptor.TransferSingleRequested += (sender, args) => this.TransferSingleRequested?.Invoke(sender, args);
+                requestInterceptor.TransferAllRequested += (sender, args) => this.TransferAllRequested?.Invoke(sender, args);
+                requestInterceptor.OnSetZoom += (sender, args) => this.BrowserControl.SetZoomLevel((args as SetZoomEvent)?.ZoomLevel ?? 1.0);
+
+                _browser.RequestHandler = requestInterceptor;
 
                 //browser.RequestHandler = new TransferUrlHijack { TransferMethod = transferItem };
                 Logger.Info("Chromium created..");

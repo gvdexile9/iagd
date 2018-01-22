@@ -135,10 +135,6 @@ namespace IAGrim.UI {
         // unit testable
 
 
-        private void buttonDonate_Click(object sender, EventArgs e) {
-            _controller.DonateNow();
-        }
-
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) {
             if (e.Button == System.Windows.Forms.MouseButtons.Left)
