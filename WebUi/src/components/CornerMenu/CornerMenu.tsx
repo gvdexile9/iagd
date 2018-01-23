@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Button } from 'react-bootstrap';
+import { Button, DropdownButton, MenuItem } from 'react-bootstrap';
 import './CornerMenu.css';
 import { isEmbedded } from '../../constants';
 
@@ -27,11 +27,11 @@ class CornerMenu extends React.Component {
     }
   }
 
-  openPaypal() {
+  openUrl(url) {
     if (isEmbedded) {
-      document.location.href = 'http://grimdawn.dreamcrash.org/ia/?donate';
+      document.location.href = url;
     } else {
-      window.open('http://grimdawn.dreamcrash.org/ia/?donate');
+      window.open(url);
     }
   }
 
@@ -40,7 +40,27 @@ class CornerMenu extends React.Component {
       <div className="corner-menu">
         <Button onClick={() => this.decrementZoom()}>-</Button>
         <Button onClick={() => this.incrementZoom()}>+</Button>
-        <Button onClick={() => this.openPaypal()}><img src={Image} height="16" /></Button>
+        <DropdownButton title="Misc" id="corner-dropdown">
+          <MenuItem onClick={() => this.openUrl('http://items.dreamcrash.org/ComponentAssembler?record=d009_relic.dbr')}>
+            Recipes
+          </MenuItem>
+
+          <MenuItem onClick={() => this.openUrl('http://dev.dreamcrash.org/enchantments/')}>
+            Components
+          </MenuItem>
+
+          <MenuItem onClick={() => this.openUrl('https://www.nexusmods.com/grimdawn/mods/44/?')}>
+            Grim Damage
+          </MenuItem>
+
+          <MenuItem onClick={() => this.openUrl('https://discord.gg/PJ87Ewa')}>
+            Discord
+          </MenuItem>
+
+        </DropdownButton>
+        <Button onClick={() => this.openUrl('http://grimdawn.dreamcrash.org/ia/?donate')}>
+          <img src={Image} height="16" />
+        </Button>
       </div>
     );
   }
