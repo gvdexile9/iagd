@@ -15,18 +15,6 @@ namespace IAGrim.UI.Misc {
         public event EventHandler OnRequestRecipeList;
         public event EventHandler OnRequestRecipeIngredients;
 
-        public void requestRecipeIngredients(string recipeRecord, string callback) {
-            OnRequestRecipeIngredients?.Invoke(this, new RequestRecipeArgument {
-                RecipeRecord = recipeRecord,
-                Callback = callback
-            });
-        }
-        public void requestRecipeList(string callback) {
-            OnRequestRecipeList?.Invoke(this, new RequestRecipeArgument {
-                Callback = callback
-            });
-        }
-
         public JSWrapper() {
 
             _settings = new JsonSerializerSettings {
@@ -68,6 +56,18 @@ namespace IAGrim.UI.Misc {
             };
         }
 
+        public HtmlTranslation translation { get; private set; }
+
+        public string Items { get; set; }
+        public bool ItemSourceExhausted { get; set; }
+
+        public event EventHandler OnClipboard;
+        public event EventHandler OnRequestItems;
+
+        public void RequestMoreItems() {
+            OnRequestItems?.Invoke(this, null);
+        }
+
         public string Serialize(object o) {
             return JsonConvert.SerializeObject(o, _settings);
         }
@@ -85,38 +85,22 @@ namespace IAGrim.UI.Misc {
             }
         }
 
-        public HtmlTranslation translation { get; private set; }
+        public void requestRecipeIngredients(string recipeRecord, string callback) {
+            OnRequestRecipeIngredients?.Invoke(this, new RequestRecipeArgument {
+                RecipeRecord = recipeRecord,
+                Callback = callback
+            });
+        }
 
-        public string Items { get; set; }
-        public bool ItemSourceExhausted { get; set; }
+        public void requestRecipeList(string callback) {
+            OnRequestRecipeList?.Invoke(this, new RequestRecipeArgument {
+                Callback = callback
+            });
+        }
 
-        public int IsTimeToShowNag { get; set; }
-
-        public event EventHandler OnTransfer;
-        public event EventHandler OnClipboard;
-        public event EventHandler OnRequestItems;
-
-        public void RequestMoreItems() {
+        public void globalRequestInitialItems() {
             OnRequestItems?.Invoke(this, null);
         }
 
-        public void TransferAll(object[] id) {
-            OnTransfer?.Invoke(this, new StashTransferEventArgs { InternalId = id, Count = int.MaxValue });
-        }
-
-        public void TransferItem(object[] id) {
-            OnTransfer?.Invoke(this, new StashTransferEventArgs { InternalId = id, Count = 1 });
-        }
-
-
-        public void OpenURL(string url) {
-            System.Diagnostics.Process.Start(url);
-        }
-
-        public string Message {
-            get {
-                return string.Empty;
-            }
-        }
     }
 }

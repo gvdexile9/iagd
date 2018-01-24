@@ -38,8 +38,6 @@ class CornerMenu extends React.Component {
   render() {
     return (
       <div className="corner-menu">
-        <Button onClick={() => this.decrementZoom()}>-</Button>
-        <Button onClick={() => this.incrementZoom()}>+</Button>
         <DropdownButton title="Misc" id="corner-dropdown">
           <MenuItem onClick={() => this.openUrl('http://items.dreamcrash.org/ComponentAssembler?record=d009_relic.dbr')}>
             Recipes
@@ -56,8 +54,9 @@ class CornerMenu extends React.Component {
           <MenuItem onClick={() => this.openUrl('https://discord.gg/PJ87Ewa')}>
             Discord
           </MenuItem>
-
         </DropdownButton>
+        <Button onClick={() => this.decrementZoom()}>-</Button>
+        <Button onClick={() => this.incrementZoom()}>+</Button>
         <Button onClick={() => this.openUrl('http://grimdawn.dreamcrash.org/ia/?donate')}>
           <img src={Image} height="16" />
         </Button>

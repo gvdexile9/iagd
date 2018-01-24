@@ -7,6 +7,7 @@ import './ItemContainer.css';
 import * as ReactTooltip from 'react-tooltip';
 import { isEmbedded } from '../constants';
 import Spinner from '../components/Spinner';
+import OnScrollLoader from './InfiniteItemLoader';
 
 interface Props {
   items: IItem[];
@@ -59,6 +60,8 @@ class ItemContainer extends React.Component<Props, object> {
 
           <ReactTooltip id="you-can-craft-this-item-tooltip"><span>You can craft this item</span>
           </ReactTooltip>
+
+          <OnScrollLoader />
         </div>
       );
     }

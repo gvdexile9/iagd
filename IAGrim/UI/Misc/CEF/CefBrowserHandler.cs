@@ -43,8 +43,9 @@ namespace IAGrim.UI.Misc {
         }
 
         public void ShowLoadingAnimation() {
-            if (_browser.IsBrowserInitialized)
-                _browser.ExecuteScriptAsync("isLoading(true);");
+            if (_browser.IsBrowserInitialized) {
+                _browser.ExecuteScriptAsync("data.globalStore.dispatch(data.globalSetIsLoading(true));");
+            }
         }
 
         public void RefreshItems() {
@@ -68,7 +69,7 @@ namespace IAGrim.UI.Misc {
 
         public void AddItems() {
             if (_browser.IsBrowserInitialized) {
-                _browser.ExecuteScriptAsync("data.globalStore.dispatch(data.globalAddItems(data.Items));");
+                _browser.ExecuteScriptAsync("data.globalStore.dispatch(data.globalAddItems(JSON.parse(data.Items)));");
             }
             else {
                 Logger.Warn("Attempted to update items but CEF not yet initialized.");

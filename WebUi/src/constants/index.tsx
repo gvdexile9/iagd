@@ -11,6 +11,9 @@ export type SET_MOCK_DATA = typeof SET_MOCK_DATA;
 export const SET_LOADING_STATUS = 'SET_LOADING_STATUS';
 export type SET_LOADING_STATUS = typeof SET_LOADING_STATUS;
 
+export const REQUEST_INITIAL_ITEMS = 'REQUEST_INITIAL_ITEMS';
+export type REQUEST_INITIAL_ITEMS = typeof REQUEST_INITIAL_ITEMS;
+
 declare abstract class cefsharp_CreatePromise {
 }
 

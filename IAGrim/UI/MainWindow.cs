@@ -465,7 +465,6 @@ namespace IAGrim.UI {
                 );
             _cefBrowserHandler.InitializeChromium(searchController.JsBind, Browser_IsBrowserInitializedChanged);
             searchController.Browser = _cefBrowserHandler;
-            searchController.JsBind.OnTransfer += TransferSingleItem;
             searchController.JsBind.OnClipboard += SetItemsClipboard;
 
             // Load the grim database

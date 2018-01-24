@@ -2,7 +2,8 @@ import {
   ACTION_SET_ITEMS,
   ACTION_ADD_ITEMS,
   SET_MOCK_DATA,
-  SET_LOADING_STATUS
+  SET_LOADING_STATUS,
+  REQUEST_INITIAL_ITEMS
 } from '../constants';
 
 import IItem from '../interfaces/IItem';
@@ -27,7 +28,12 @@ export interface SetLoadingStatus {
   status: boolean
 }
 
-export type AnyAction = SetItems | AddItems | SetMockItems | SetLoadingStatus;
+export interface RequestInitialItems {
+  type: REQUEST_INITIAL_ITEMS
+}
+
+
+export type AnyAction = SetItems | AddItems | SetMockItems | SetLoadingStatus | RequestInitialItems;
 
 export function setItems(items: IItem[]): SetItems {
   console.log('Dispatching a request for setting items');
@@ -59,6 +65,13 @@ export function setLoadingStatus(status: boolean): SetLoadingStatus {
   return {
     type: SET_LOADING_STATUS,
     status: status
+  };
+}
+
+export function requestInitialItems(): RequestInitialItems {
+  console.log('Dispatching a request to load initial items');
+  return {
+    type: REQUEST_INITIAL_ITEMS
   };
 }
 

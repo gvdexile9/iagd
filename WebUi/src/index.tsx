@@ -10,7 +10,7 @@ import { Store } from 'react-redux';
 import { createStore } from 'redux';
 import { GlobalState } from './types/index';
 import { setItemReducer } from './reducers/setItemReducer';
-import { setItems, addItems } from './actions';
+import { setItems, addItems, setLoadingStatus } from './actions';
 
 /// https://redux.js.org/docs/api/combineReducers.html
 const enhancer = window['devToolsExtension'] ? window['devToolsExtension']()(createStore) : createStore;
@@ -30,11 +30,13 @@ declare abstract class data {
   public static globalStore: {};
   public static globalSetItems(items: IItem[]): {};
   public static globalAddItems(items: IItem[]): {};
+  public static globalSetIsLoading(v: boolean): {};
 }
 if (typeof data === 'object') {
   data.globalStore = store;
   data.globalSetItems = setItems;
   data.globalAddItems = addItems;
+  data.globalSetIsLoading = setLoadingStatus;
 }
 /* == END MAGIC == */
 

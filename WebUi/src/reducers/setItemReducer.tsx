@@ -1,7 +1,10 @@
 import { AnyAction } from '../actions';
-import {ACTION_SET_ITEMS, ACTION_ADD_ITEMS, SET_MOCK_DATA, SET_LOADING_STATUS} from '../constants';
+import {ACTION_SET_ITEMS, ACTION_ADD_ITEMS, SET_MOCK_DATA, SET_LOADING_STATUS, isEmbedded, REQUEST_INITIAL_ITEMS} from '../constants';
 import { GlobalState } from '../types';
 
+declare abstract class data {
+  public static globalRequestInitialItems(): {};
+}
 
 export function setItemReducer(state: GlobalState, action: AnyAction): GlobalState {
   if (action.type === ACTION_SET_ITEMS) {
@@ -11,7 +14,8 @@ export function setItemReducer(state: GlobalState, action: AnyAction): GlobalSta
 
   else if (action.type === ACTION_ADD_ITEMS) {
     console.log(`Adding ${action.items.length} items to the item view`);
-    return {...state, items: action.items, isLoading: false};
+    console.log(action.items);
+    return {...state, items: state.items.concat(action.items), isLoading: false};
   }
 
   else if (action.type === SET_MOCK_DATA) {
@@ -24,6 +28,14 @@ export function setItemReducer(state: GlobalState, action: AnyAction): GlobalSta
     console.log('Update state for loading status to', action.status);
     return {...state, isLoading: action.status};
   }
+
+  else if (action.type === REQUEST_INITIAL_ITEMS) {
+    if (isEmbedded) {
+      console.log('Initial items requested, forwarding to parent application');
+      data.globalRequestInitialItems();
+      return state;
+
+    }}
 
   return state;
 }

@@ -33,7 +33,7 @@ namespace IAGrim.UI.Controller {
 
         public CefBrowserHandler Browser;
 
-        public readonly JSWrapper JsBind = new JSWrapper { IsTimeToShowNag = -1 };
+        public readonly JSWrapper JsBind = new JSWrapper();
 
         private string _previousRecipe;
         private string _previousCallback;

@@ -1,5 +1,5 @@
 import Button from '../components/Button';
-import { AnyAction, setMockItems } from '../actions';
+import {AnyAction, setLoadingStatus, setMockItems} from '../actions';
 import { GlobalState } from '../types/index';
 import { connect, Dispatch } from 'react-redux';
 import IItem from '../interfaces/IItem';
@@ -6541,7 +6541,10 @@ export function mapStateToProps({items}: GlobalState, {label}: MagicButtonProps)
 
 export function mapDispatchToProps(dispatch: Dispatch<AnyAction>): MagicButtonDispatch {
   return {
-    onClick: () => dispatch(setMockItems(JSON.stringify(addTodo3(''))))
+    onClick: () => {
+      dispatch(setLoadingStatus(true));
+      setTimeout(() => dispatch(setMockItems(JSON.stringify(addTodo3('')))), 750);
+    }
   };
 }
 
