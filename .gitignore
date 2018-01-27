@@ -400,3 +400,5 @@ obj
 bin
 /IDA
 /Website
+/Evilsoft.Commons/Exceptions/PHP
+/WebUi/build

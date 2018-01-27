@@ -119,7 +119,9 @@ namespace IAGrim.UI {
             var message = _searchController.Search(query, filters.DuplicatesOnly, includeBuddyItems, checkBoxOrderByLevel.Checked);
 
             Logger.Info("Updating UI..");
-            _setStatus(message);
+            if (!string.IsNullOrEmpty(message)) {
+                _setStatus(message);
+            }
             Logger.Info("Done");
         }
 

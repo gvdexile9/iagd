@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Provider, Store } from 'react-redux';
-import {Tab, TabList, TabPanel, Tabs} from 'react-tabs';
-import { GlobalState } from './types/index';
+import { Tab, TabList, TabPanel, Tabs } from 'react-tabs';
+import { ApplicationState } from './types/index';
 import MagicButton from './containers/MagicButton';
 import { MockStore } from 'redux-mock-store';
 import ItemContainer from './containers/ItemContainer';
@@ -10,9 +10,11 @@ import { isEmbedded } from './constants/index';
 import 'react-tabs/style/react-tabs.css'; // scss and less also available
 import './App.css';
 import { requestInitialItems } from './actions';
+import CraftingContainer from './containers/CraftingContainer';
+import NotificationContainer from './containers/NotificationContainer';
 
 export interface Props {
-  store: Store<GlobalState> | MockStore<GlobalState>;
+  store: Store<ApplicationState> | MockStore<ApplicationState>;
 }
 
 class App extends React.Component<Props, object> {
@@ -46,15 +48,16 @@ class App extends React.Component<Props, object> {
               </TabPanel>
 
               <TabPanel>
-                TODO: Crafting is not implemented in this build!
+                <CraftingContainer />
               </TabPanel>
             </Tabs>
+
           </div>
+          <NotificationContainer />
         </div>
       </Provider>
     );
   }
-
 }
 
 export default App;

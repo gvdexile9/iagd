@@ -7,6 +7,8 @@ import {
 } from '../constants';
 
 import IItem from '../interfaces/IItem';
+import { NotificationLevel, show } from 'react-notification-system-redux';
+import { Action } from 'redux';
 
 export interface SetItems {
   type: ACTION_SET_ITEMS;
@@ -24,14 +26,13 @@ export interface SetMockItems {
 }
 
 export interface SetLoadingStatus {
-  type: SET_LOADING_STATUS,
-  status: boolean
+  type: SET_LOADING_STATUS;
+  status: boolean;
 }
 
 export interface RequestInitialItems {
-  type: REQUEST_INITIAL_ITEMS
+  type: REQUEST_INITIAL_ITEMS;
 }
-
 
 export type AnyAction = SetItems | AddItems | SetMockItems | SetLoadingStatus | RequestInitialItems;
 
@@ -75,3 +76,13 @@ export function requestInitialItems(): RequestInitialItems {
   };
 }
 
+export function showMessage(message: string, level: NotificationLevel): Action {
+  return show({
+      message: message,
+      autoDismiss: 3.5,
+      dismissible: false,
+      position: 'bc'
+    },
+    level
+  );
+}

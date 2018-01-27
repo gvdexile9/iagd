@@ -306,6 +306,7 @@
     <Compile Include="UI\Misc\CEF\ItemTransferEvent.cs" />
     <Compile Include="UI\Misc\CEF\IUserFeedbackHandler.cs" />
     <Compile Include="UI\Misc\CEF\SetZoomEvent.cs" />
+    <Compile Include="UI\Misc\CEF\UserFeedbackLevel.cs" />
     <Compile Include="UI\Misc\HtmlTranslation.cs" />
     <Compile Include="UI\Misc\RequestRecipeArgument.cs" />
     <Compile Include="UI\Misc\TextboxHoverFocusHighlight.cs" />

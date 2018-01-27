@@ -1,12 +1,26 @@
 import { AnyAction } from '../actions';
-import {ACTION_SET_ITEMS, ACTION_ADD_ITEMS, SET_MOCK_DATA, SET_LOADING_STATUS, isEmbedded, REQUEST_INITIAL_ITEMS} from '../constants';
-import { GlobalState } from '../types';
+import {
+  ACTION_SET_ITEMS,
+  ACTION_ADD_ITEMS,
+  SET_MOCK_DATA,
+  SET_LOADING_STATUS,
+  isEmbedded,
+  REQUEST_INITIAL_ITEMS
+} from '../constants';
+import { ApplicationState } from '../types';
 
 declare abstract class data {
   public static globalRequestInitialItems(): {};
 }
 
-export function setItemReducer(state: GlobalState, action: AnyAction): GlobalState {
+const initialState = {
+  clickCounter: 1,
+  items: [],
+  isLoading: false
+};
+
+export function setItemReducer(state: ApplicationState = initialState, action: AnyAction): ApplicationState {
+  console.log('=============', state, action);
   if (action.type === ACTION_SET_ITEMS) {
     console.log(`Setting ${action.items.length} items to the item view`);
     return {...state, items: action.items, isLoading: false};
@@ -35,7 +49,8 @@ export function setItemReducer(state: GlobalState, action: AnyAction): GlobalSta
       data.globalRequestInitialItems();
       return state;
 
-    }}
+    }
+  }
 
   return state;
 }

@@ -2,7 +2,6 @@ import * as React from 'react';
 import './Button.css';
 import './Spinner.css';
 
-
 function Spinner() {
   return (
     <div className="loading-container">

@@ -27,7 +27,7 @@ class CornerMenu extends React.Component {
     }
   }
 
-  openUrl(url) {
+  openUrl(url: string) {
     if (isEmbedded) {
       document.location.href = url;
     } else {

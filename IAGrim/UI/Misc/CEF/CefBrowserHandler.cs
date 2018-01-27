@@ -75,19 +75,23 @@ namespace IAGrim.UI.Misc {
                 Logger.Warn("Attempted to update items but CEF not yet initialized.");
             }
         }
+
+        private const string dispatch = "data.globalStore.dispatch";
         
-        
-        public void ShowMessage(string message, string level) {
+
+        public void ShowMessage(string message, UserFeedbackLevel level) {
+            string levelLowercased = level.ToString().ToLower();
+            var m = message.Replace("\n", "\\n").Replace("'", "\\'");
             if (!string.IsNullOrEmpty(message)) {
                 if (_browser.IsBrowserInitialized)
-                    _browser.ExecuteScriptAsync("showMessage", new[] { message.Replace("\n", "\\n"), level, level.ToLower() });
+                    _browser.ExecuteScriptAsync($"{dispatch}(data.showMessage('{m}', '{levelLowercased}'));");
                 else
                     Logger.Warn($"Attempted to display message \"{message}\" but browser is not yet initialized");
             }
         }
 
         public void ShowMessage(string message) {
-            ShowMessage(message, "Info");
+            ShowMessage(message, UserFeedbackLevel.Info);
         }
 
         public void InitializeChromium(object bindeable, EventHandler<IsBrowserInitializedChangedEventArgs> Browser_IsBrowserInitializedChanged) {

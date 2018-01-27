@@ -1,6 +1,6 @@
 import Button from '../components/Button';
-import {AnyAction, setLoadingStatus, setMockItems} from '../actions';
-import { GlobalState } from '../types/index';
+import { AnyAction, setLoadingStatus, setMockItems } from '../actions';
+import { ApplicationState } from '../types/index';
 import { connect, Dispatch } from 'react-redux';
 import IItem from '../interfaces/IItem';
 
@@ -6531,7 +6531,7 @@ export const addTodo3 = (text: string): IItem[] => {
   return dummyData;
 };
 
-export function mapStateToProps({items}: GlobalState, {label}: MagicButtonProps): MagicButtonState {
+export function mapStateToProps({items}: ApplicationState, {label}: MagicButtonProps): MagicButtonState {
   return {
     count: 1,
     items: addTodo3(''),

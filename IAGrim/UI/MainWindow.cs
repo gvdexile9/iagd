@@ -362,7 +362,7 @@ namespace IAGrim.UI {
                 }
                 else {
                     statusLabel.Text = feedback.Replace("\\n", " - ");
-                    _cefBrowserHandler.ShowMessage(feedback, "Info");
+                    _cefBrowserHandler.ShowMessage(feedback, UserFeedbackLevel.Info);
                 }
             }
             catch (ObjectDisposedException) {

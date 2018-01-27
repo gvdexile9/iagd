@@ -3,8 +3,8 @@ import * as ReactDOM from 'react-dom';
 import App from './App';
 import configureStore from 'redux-mock-store'
 
-import { GlobalState } from './types/index';
-const mockStore = configureStore<GlobalState>([]);
+import { ApplicationState } from './types/index';
+const mockStore = configureStore<ApplicationState>([]);
 
 it('renders without crashing', () => {
   const store = mockStore({
