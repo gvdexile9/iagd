@@ -85,17 +85,14 @@ namespace IAGrim.UI.Misc {
             }
         }
 
-        public void requestRecipeIngredients(string recipeRecord, string callback) {
+        public void globalRequestRecipeComponents(string recipeRecord) {
             OnRequestRecipeIngredients?.Invoke(this, new RequestRecipeArgument {
-                RecipeRecord = recipeRecord,
-                Callback = callback
+                RecipeRecord = recipeRecord
             });
         }
 
-        public void requestRecipeList(string callback) {
-            OnRequestRecipeList?.Invoke(this, new RequestRecipeArgument {
-                Callback = callback
-            });
+        public void globalRequestRecipeList() {
+            OnRequestRecipeList?.Invoke(this, null);
         }
 
         public void globalRequestInitialItems() {

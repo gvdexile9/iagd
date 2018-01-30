@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,7 +27,7 @@ namespace IAGrim.UI.Misc.CEF {
 
             if (request.Url.StartsWith("setzoom://")) {
                 double val;
-                double.TryParse(request.Url.Replace("setzoom://", "").Replace(".", ","), out val);
+                double.TryParse(request.Url.Replace("setzoom://", "").Replace(",", "."), NumberStyles.Any, CultureInfo.InvariantCulture, out val);
                 OnSetZoom?.Invoke(this, new SetZoomEvent {
                     ZoomLevel = val
                 });

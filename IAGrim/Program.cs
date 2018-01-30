@@ -31,6 +31,7 @@ using IAGrim.Database.DAO;
 using IAGrim.Parser.Arc;
 using IAGrim.Parsers.GameDataParsing.Service;
 using IAGrim.Services.Crafting;
+using IAGrim.UI.Misc.CEF;
 using IAGrim.UI.Popups;
 using IAGrim.Utilities.HelperClasses;
 

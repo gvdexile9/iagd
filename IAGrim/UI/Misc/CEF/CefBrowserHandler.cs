@@ -1,18 +1,12 @@
-﻿using CefSharp;
+﻿using System;
+using System.IO;
+using System.Windows.Forms;
+using CefSharp;
 using CefSharp.WinForms;
-using IAGrim.Database;
 using IAGrim.Utilities;
 using log4net;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using IAGrim.UI.Misc.CEF;
 
-namespace IAGrim.UI.Misc {
+namespace IAGrim.UI.Misc.CEF {
     public class CefBrowserHandler : IUserFeedbackHandler, IDisposable {
         private static readonly ILog Logger = LogManager.GetLogger(typeof(CefBrowserHandler));
         private ChromiumWebBrowser _browser;
@@ -21,13 +15,13 @@ namespace IAGrim.UI.Misc {
 
         public ChromiumWebBrowser BrowserControl => _browser;
 
-        private object lockObj = new object();
+        private readonly object _lockObj = new object();
 
         ~CefBrowserHandler() {
             Dispose();
         }
         public void Dispose() {
-            lock (lockObj) {
+            lock (_lockObj) {
                 if (_browser != null) {
                     CefSharpSettings.WcfTimeout = TimeSpan.Zero;
                     _browser.Dispose();
@@ -65,11 +59,36 @@ namespace IAGrim.UI.Misc {
                 Logger.Warn("Attempted to execute a callback but CEF not yet initialized.");
             }
         }
-        
+
+        public void SetRecipes(string json)
+        {
+            if (_browser.IsBrowserInitialized)
+            {
+                var command = $"{dispatch}(data.globalSetRecipes({json}));";
+                _browser.ExecuteScriptAsync(command);
+            }
+            else
+            {
+                Logger.Warn("Attempted a call to JS CEF not yet initialized.");
+            }
+        }
+
+        public void SetRecipeIngredients(string json)
+        {
+            if (_browser.IsBrowserInitialized)
+            {
+                var command = $"{dispatch}(data.globalSetRecipeIngredients({json}));";
+                _browser.ExecuteScriptAsync(command);
+            }
+            else
+            {
+                Logger.Warn("Attempted a call to JS CEF not yet initialized.");
+            }
+        }
 
         public void AddItems() {
             if (_browser.IsBrowserInitialized) {
-                _browser.ExecuteScriptAsync("data.globalStore.dispatch(data.globalAddItems(JSON.parse(data.Items)));");
+                _browser.ExecuteScriptAsync($"{dispatch}(data.globalAddItems(JSON.parse(data.Items)));");
             }
             else {
                 Logger.Warn("Attempted to update items but CEF not yet initialized.");
@@ -78,7 +97,6 @@ namespace IAGrim.UI.Misc {
 
         private const string dispatch = "data.globalStore.dispatch";
         
-
         public void ShowMessage(string message, UserFeedbackLevel level) {
             string levelLowercased = level.ToString().ToLower();
             var m = message.Replace("\n", "\\n").Replace("'", "\\'");

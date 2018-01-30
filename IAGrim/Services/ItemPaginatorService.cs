@@ -11,7 +11,7 @@ namespace IAGrim.Services {
         private readonly Comparison<PlayerHeldItem> _comparer;
 
         private int _skip;
-        private List<PlayerHeldItem> _items;
+        private List<PlayerHeldItem> _items = new List<PlayerHeldItem>();
 
 
         private int Remaining => Math.Min(_limit, _items.Count - _skip);

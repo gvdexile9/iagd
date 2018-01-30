@@ -12,7 +12,7 @@ class NotificationContainer extends React.Component<Props, {}> {
   render() {
     const {notifications} = this.props;
 
-    //Optional styling
+    // Optional styling
     const style = {
       NotificationItem: { // Override the notification item
         DefaultStyle: { // Applied to every notification, regardless of the notification level

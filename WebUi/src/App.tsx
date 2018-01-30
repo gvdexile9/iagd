@@ -10,8 +10,9 @@ import { isEmbedded } from './constants/index';
 import 'react-tabs/style/react-tabs.css'; // scss and less also available
 import './App.css';
 import { requestInitialItems } from './actions';
-import CraftingContainer from './containers/CraftingContainer';
+import CraftingContainer from './containers/recipes/CraftingContainer';
 import NotificationContainer from './containers/NotificationContainer';
+import { getRecipes } from './containers/recipes/actions';
 
 export interface Props {
   store: Store<ApplicationState> | MockStore<ApplicationState>;
@@ -24,6 +25,7 @@ class App extends React.Component<Props, object> {
     super(props);
     this.props = props;
     this.props.store.dispatch(requestInitialItems());
+    this.props.store.dispatch(getRecipes());
   }
 
   render() {
