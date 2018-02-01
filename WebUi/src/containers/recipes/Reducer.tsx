@@ -2,7 +2,7 @@ import { RecipeAction } from './actions';
 import { SET_RECIPES, GET_RECIPES, isEmbedded, GET_RECIPE_COMPONENTS, SET_RECIPE_COMPONENTS, RELIC_TEST_DATA, RELIC_TEST_DATA_2 } from '../../constants';
 import { RecipeReducerState } from './types';
 
-// eslint-disable-next-line
+// tslint:disable-next-line
 declare abstract class data {
   public static globalRequestRecipeList(): {};
   public static globalRequestRecipeComponents(record: string): {};

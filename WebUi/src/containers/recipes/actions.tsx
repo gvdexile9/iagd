@@ -17,7 +17,7 @@ export interface RequestRecipeComponents {
 
 export interface SetRecipeComponents {
   type: SET_RECIPE_COMPONENTS;
-  components: Component
+  components: Component;
 }
 
 export type RecipeAction = SetRecipes | GetRecipes | RequestRecipeComponents | SetRecipeComponents;

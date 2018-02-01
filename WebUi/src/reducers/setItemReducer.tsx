@@ -9,7 +9,7 @@ import {
 } from '../constants';
 import { ApplicationState } from '../types';
 
-// eslint-disable-next-line
+// tslint:disable-next-line
 declare abstract class data {
   public static globalRequestInitialItems(): {};
 }

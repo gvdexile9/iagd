@@ -1,8 +1,9 @@
 import * as React from 'react';
-import ParseTree from '../../logic/TreeParser';
+import ParseTree, { GetTotalSum, JsTreeNode } from '../../logic/TreeParser';
 import CheckboxTree from 'react-checkbox-tree';
 import 'react-checkbox-tree/lib/react-checkbox-tree.css';
 import { Component } from './types';
+import './Tree.css';
 
 interface Props {
   selectedRecipe: Component;
@@ -11,7 +12,7 @@ interface Props {
 interface InternalState {
   checked: string[];
   expanded: string[];
-  nodes: {};
+  nodes: JsTreeNode[];
 }
 export class Tree extends React.Component<Props, {}> {
   state: InternalState;
@@ -28,7 +29,6 @@ export class Tree extends React.Component<Props, {}> {
     };
   }
 
-
   componentWillReceiveProps(props: Props) {
     const tree = ParseTree(props.selectedRecipe);
     const nodes = [tree.rootNode];
@@ -41,20 +41,37 @@ export class Tree extends React.Component<Props, {}> {
   }
 
   render() {
+    const missingComponents = this.state.nodes.length > 0 ? GetTotalSum(this.state.nodes[0], this.state.checked) : [];
+
     return (
       <div>
-        <br/><br/>
         {this.props.selectedRecipe.name !== '' &&
-        <div>
-          <h3>Crafting recipe for {this.props.selectedRecipe.name}</h3>
-          <CheckboxTree
-            nodes={this.state.nodes}
-            checked={this.state.checked}
-            expanded={this.state.expanded}
-            onCheck={checked => this.setState({ checked })}
-            onExpand={expanded => this.setState({ expanded })}
-          />
-          <h3>You are currently lacking: TODO</h3>
+        <div className="crafting-container">
+          <div>
+            <h3>Crafting recipe for {this.props.selectedRecipe.name}</h3>
+            <CheckboxTree
+              nodes={this.state.nodes}
+              checked={this.state.checked}
+              expanded={this.state.expanded}
+              onCheck={checked => {
+                this.setState({
+                  checked: checked
+                });
+              }
+            }
+              onExpand={expanded => this.setState({ expanded })}
+            />
+          </div>
+          <div id="itemSum">
+            <h3>You are currently lacking:</h3>
+            <ul>
+              { missingComponents.map((component) =>
+                <li key={'missing-component-' + component.label}>
+                  {component.icon} {component.sum}x {component.label}
+                </li>
+              )}
+            </ul>
+          </div>
         </div>
         }
         <br />

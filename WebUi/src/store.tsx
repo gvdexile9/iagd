@@ -12,6 +12,7 @@ const reducers = combineReducers({
 });
 
 /// https://redux.js.org/docs/api/combineReducers.html
+// tslint:disable-next-line
 const enhancer = window['devToolsExtension'] ? window['devToolsExtension']()(createStore) : createStore;
 
 const store: Store<ApplicationState> = enhancer(reducers, {});

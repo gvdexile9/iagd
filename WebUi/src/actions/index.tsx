@@ -77,7 +77,8 @@ export function requestInitialItems(): RequestInitialItems {
 }
 
 export function showMessage(message: string, level: NotificationLevel): Action {
-  return show({
+  return show(
+    {
       message: message,
       autoDismiss: 3.5,
       dismissible: false,

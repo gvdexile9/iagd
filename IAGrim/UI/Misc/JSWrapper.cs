@@ -10,7 +10,7 @@ using IAGrim.Utilities;
 namespace IAGrim.UI.Misc {
 
     public class JSWrapper {
-        private JsonSerializerSettings _settings;
+        private readonly JsonSerializerSettings _settings;
 
         public event EventHandler OnRequestRecipeList;
         public event EventHandler OnRequestRecipeIngredients;

@@ -15,6 +15,7 @@ import { Component, RecipeList } from './containers/recipes/types';
   data.globalStore.dispatch(data.globalSetItems());
   This allows CEFSharp embedded to update the redux state of the app
 */
+// tslint:disable-next-line
 declare abstract class data {
   public static globalStore: {};
   public static globalSetItems(items: IItem[]): {};
