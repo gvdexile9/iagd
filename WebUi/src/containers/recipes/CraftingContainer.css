@@ -1,0 +1,8 @@
+.recipe-dropdowns {
+  display: flex;
+  width: 70vw;
+}
+
+.recipe-dropdowns .Select {
+  width: 30%;
+}

@@ -1,12 +1,13 @@
 import * as React from 'react';
 import Item from '../components/Item';
 import IItem from '../interfaces/IItem';
-import { GlobalState } from '../types/index';
 import { connect } from 'react-redux';
 import './ItemContainer.css';
 import * as ReactTooltip from 'react-tooltip';
 import { isEmbedded } from '../constants';
 import Spinner from '../components/Spinner';
+import OnScrollLoader from './InfiniteItemLoader';
+import { GlobalReducerState } from '../types';
 
 interface Props {
   items: IItem[];
@@ -49,7 +50,8 @@ class ItemContainer extends React.Component<Props, object> {
       return (
         <div className="items">
 
-          {items.map((item) => <Item
+          {items.map((item) =>
+            <Item
               item={item}
               key={'item-' + item.url.join(':')}
               transferAll={(url) => this.transferAll(url)}
@@ -59,6 +61,8 @@ class ItemContainer extends React.Component<Props, object> {
 
           <ReactTooltip id="you-can-craft-this-item-tooltip"><span>You can craft this item</span>
           </ReactTooltip>
+
+          <OnScrollLoader />
         </div>
       );
     }
@@ -72,10 +76,10 @@ class ItemContainer extends React.Component<Props, object> {
   }
 }
 
-export function mapStateToProps({items, isLoading}: GlobalState): Props {
+export function mapStateToProps(state: GlobalReducerState): Props {
   return {
-    items: items,
-    isLoading: isLoading
+    items: state.setItemReducer.items,
+    isLoading: state.setItemReducer.isLoading
   };
 }
 

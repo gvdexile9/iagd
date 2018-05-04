@@ -1,0 +1,12 @@
+
+div.crafting-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+div.crafting-container > div {
+  flex-shrink: 1;
+  flex-grow: 0;
+}
+#itemSum {
+  margin-left: 35px;
+}

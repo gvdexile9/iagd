@@ -10,7 +10,7 @@ using IAGrim.Utilities;
 namespace IAGrim.UI.Misc {
 
     public class JSWrapper {
-        private JsonSerializerSettings _settings;
+        private readonly JsonSerializerSettings _settings;
 
         public event EventHandler OnRequestRecipeList;
         public event EventHandler OnRequestRecipeIngredients;
@@ -94,7 +94,6 @@ namespace IAGrim.UI.Misc {
 
         public int IsTimeToShowNag { get; set; }
 
-        public event EventHandler OnTransfer;
         public event EventHandler OnClipboard;
         public event EventHandler OnRequestItems;
 
@@ -102,23 +101,24 @@ namespace IAGrim.UI.Misc {
             OnRequestItems?.Invoke(this, null);
         }
 
-        public void TransferAll(object[] id) {
-            OnTransfer?.Invoke(this, new StashTransferEventArgs { InternalId = id, Count = int.MaxValue });
-        }
-
-        public void TransferItem(object[] id) {
-            OnTransfer?.Invoke(this, new StashTransferEventArgs { InternalId = id, Count = 1 });
-        }
-
-
-        public void OpenURL(string url) {
-            System.Diagnostics.Process.Start(url);
-        }
-
         public string Message {
             get {
                 return string.Empty;
             }
+        }
+
+        public void globalRequestRecipeComponents(string recipeRecord) {
+            OnRequestRecipeIngredients?.Invoke(this, new RequestRecipeArgument {
+                RecipeRecord = recipeRecord
+            });
+        }
+
+        public void globalRequestRecipeList() {
+            OnRequestRecipeList?.Invoke(this, null);
+        }
+
+        public void globalRequestInitialItems() {
+            OnRequestItems?.Invoke(this, null);
         }
     }
 }

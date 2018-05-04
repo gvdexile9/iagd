@@ -15,6 +15,10 @@ namespace IAGrim.Utilities {
     internal static class ItemHtmlWriter {
         private static readonly ILog Logger = LogManager.GetLogger(typeof(ItemHtmlWriter));
 
+        static ItemHtmlWriter() {
+            CopyMissingFiles();
+        }
+
         private static JsonSkill GetJsonSkill(PlayerItemSkill skill) {
             return new JsonSkill {
                 Name = skill.Name,
@@ -32,8 +36,7 @@ namespace IAGrim.Utilities {
 
             bool isCloudSynced = false;
             object[] id = { item.Id, "", "", "", "" };
-            PlayerItem pi = item as PlayerItem;
-            if (pi != null) {
+            if (item is PlayerItem pi) {
                 id = new object[] { pi.Id, pi.BaseRecord, pi.PrefixRecord, pi.SuffixRecord, pi.MateriaRecord };
                 isCloudSynced = !string.IsNullOrWhiteSpace(pi.AzureUuid);
             }
@@ -91,7 +94,7 @@ namespace IAGrim.Utilities {
         /// <summary>
         /// Copy any css/js files from the app\resource folder to the items working directory
         /// </summary>
-        private static void CopyMissingFiles() {
+        public static void CopyMissingFiles() {
             string appResFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "resources");
 
             foreach (string dirPath in Directory.GetDirectories(appResFolder, "*", SearchOption.AllDirectories)) {
@@ -102,32 +105,9 @@ namespace IAGrim.Utilities {
             foreach (string newPath in Directory.GetFiles(appResFolder, "*.*", SearchOption.AllDirectories)) {
                 File.Copy(newPath, newPath.Replace(appResFolder, GlobalPaths.StorageFolder), true);
             }
-
-            /*
-            foreach (var pattern in new string[] { "*.css", "*.js" }) {
-                foreach (var file in Directory.GetFiles(appResFolder, pattern)) {
-                    FileInfo fileInfo = new FileInfo(file);
-
-                    var target = Path.Combine(GlobalPaths.StorageFolder, fileInfo.Name);
-                    //if (!File.Exists(target))
-                    File.Copy(file, target, true);
-                }
-            }
-
-            var recipeFileSrc = Path.Combine(appResFolder, "recipe.png");
-            var recipeFileDst = Path.Combine(GlobalPaths.StorageFolder, "recipe.png");
-            if (!File.Exists(recipeFileDst))
-                File.Copy(recipeFileSrc, recipeFileDst);*/
         }
 
         public static List<JsonItem> ToJsonSerializeable(List<PlayerHeldItem> items) {
-            CopyMissingFiles();
-
-            string src = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "resources", "item-kjs.html");
-            string dst = GlobalPaths.ItemsHtmlFile;
-
-            File.Copy(src, dst, true); // Redundant really, static file now
-
             var jsonItems = new List<JsonItem>(items.Select(GetJsonItem));
             return jsonItems;
         }
