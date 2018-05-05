@@ -499,6 +499,9 @@ namespace IAGrim.UI {
 
             _searchWindow = new SearchWindow(_cefBrowserHandler.BrowserControl, SetFeedback, _playerItemDao, searchController, _itemTagDao);
             addAndShow(_searchWindow, searchPanel);
+            _stashManager.StashUpdated += (_, __) => {
+                _searchWindow.UpdateListview();
+            };
 
 
             addAndShow(
@@ -646,6 +649,7 @@ namespace IAGrim.UI {
                 _transferController.TransferItem(ignored, transferArgs);
             }
         }
+
         void TransferAllItems(object ignored, EventArgs args) {
 
             if (InvokeRequired) {

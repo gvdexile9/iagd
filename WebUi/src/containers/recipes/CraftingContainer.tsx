@@ -44,7 +44,7 @@ class CraftingContainer extends React.Component<StateProps & DispatchProps, {}> 
 
   render() {
     return (
-      <div>
+      <div className="crafting-tab">
         <div className="recipe-dropdowns">
           <Select
             onChange={this.onRelicRecipeChanged}

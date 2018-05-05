@@ -3,4 +3,6 @@ body {
   padding: 0;
   /* font-family: sans-serif; */
 
+  font-family: "verdana", "geneva", "lucida", "lucida grande", "arial", "helvetica", sans-serif;
+  font-size: 12px;
 }

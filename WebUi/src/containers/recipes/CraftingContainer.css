@@ -5,4 +5,8 @@
 
 .recipe-dropdowns .Select {
   width: 30%;
+  min-width: 220px;
+}
+.crafting-tab {
+  width: 100%;
 }
