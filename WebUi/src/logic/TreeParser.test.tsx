@@ -82,7 +82,7 @@ it('GetTotalSum will return both parent and child if neither are checked', () =>
 
   const result = GetTotalSum(data, ['-checked-b-']);
   expect(result).toHaveLength(1);
-  expect(result[0].label).toBe('c')
+  expect(result[0].label).toBe('c');
 });
 
 it('GetTotalSum will return only the child if neither are checked', () => {

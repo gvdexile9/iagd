@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import App from './App';
-import configureStore from 'redux-mock-store'
+import configureStore from 'redux-mock-store';
 
 import { ApplicationState } from './types/index';
 const mockStore = configureStore<ApplicationState>([]);

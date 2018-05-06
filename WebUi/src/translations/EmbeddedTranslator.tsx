@@ -1,5 +1,6 @@
 import { isEmbedded } from '../constants';
 
+/* tslint:disable */
 declare abstract class data {
   public static translation: {[id: string] : string};
 }

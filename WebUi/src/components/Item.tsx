@@ -53,7 +53,7 @@ class Item extends React.Component<Props, object> {
       }
     }
 
-    return <span></span>
+    return null;
   }
 
   translateQualityToClass(quality: string): string {
@@ -62,23 +62,24 @@ class Item extends React.Component<Props, object> {
 
   renderCornerContainer(item: IItem) {
     const buddyTooltip = Guid.raw();
-    if (item.buddies && item.buddies.length > 0)
-      console.warn(item.buddies, translate('item.buddies.plural', item.buddies.join('\n')))
+
     return (
       <div className="recipe-item-corner">
         {item.type === IItemType.Player && item.hasCloudBackup &&
-        <img
-          className="cursor-help"
-          src={cloudOkIcon}
-          data-tip="true" data-for="cloud-ok-tooltip"
-        />
+          <img
+            className="cursor-help"
+            src={cloudOkIcon}
+            data-tip="true"
+            data-for="cloud-ok-tooltip"
+          />
         }
 
         {item.type === IItemType.Player && !item.hasCloudBackup &&
         <img
           className="cursor-help"
           src={cloudErrIcon}
-          data-tip="true" data-for="cloud-err-tooltip"
+          data-tip="true"
+          data-for="cloud-err-tooltip"
         />
         }
         {item.type !== IItemType.Buddy &&
@@ -88,7 +89,8 @@ class Item extends React.Component<Props, object> {
             <img
               className="cursor-help"
               src={buddyIcon}
-              data-tip="true" data-for={buddyTooltip}
+              data-tip="true"
+              data-for={buddyTooltip}
             />
             <ReactTooltip id={buddyTooltip}>
               <span>{translate('item.buddies.singular', item.buddies[0])}</span>
@@ -101,7 +103,8 @@ class Item extends React.Component<Props, object> {
             <img
               className="cursor-help"
               src={buddyIcon}
-              data-tip="true" data-for={buddyTooltip}
+              data-tip="true"
+              data-for={buddyTooltip}
             />
             <ReactTooltip id={buddyTooltip}>
               <span>{translate('item.buddies.plural', item.buddies.join('\n'))}</span>

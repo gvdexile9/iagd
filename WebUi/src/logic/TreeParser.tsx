@@ -86,6 +86,7 @@ function ParseTree(node: TreeDataNode): Tree {
   };
 }
 
+// tslint:disable-next-line
 export function flatMap<T>(obj: T, children: (T) => T[]): T[] {
   let nodes = [obj];
 

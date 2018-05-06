@@ -14,7 +14,6 @@ import NotificationContainer from './containers/NotificationContainer';
 import { getRecipes } from './containers/recipes/actions';
 import translate from './translations/EmbeddedTranslator';
 
-
 export interface Props {
   store: Store<ApplicationState> | MockStore<ApplicationState>;
 }
@@ -62,7 +61,6 @@ class App extends React.Component<Props, object> {
               <TabPanel>
                 <CraftingContainer />
               </TabPanel>
-
 
               <TabPanel/>
               <TabPanel/>
