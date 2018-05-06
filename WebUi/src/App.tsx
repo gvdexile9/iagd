@@ -12,6 +12,8 @@ import { requestInitialItems } from './actions';
 import CraftingContainer from './containers/recipes/CraftingContainer';
 import NotificationContainer from './containers/NotificationContainer';
 import { getRecipes } from './containers/recipes/actions';
+import translate from './translations/EmbeddedTranslator';
+
 
 export interface Props {
   store: Store<ApplicationState> | MockStore<ApplicationState>;
@@ -27,6 +29,14 @@ class App extends React.Component<Props, object> {
     this.props.store.dispatch(getRecipes());
   }
 
+  openUrl(url: string) {
+    if (isEmbedded) {
+      document.location.href = url;
+    } else {
+      window.open(url);
+    }
+  }
+
   render() {
     const { store } = this.props;
 
@@ -37,8 +47,10 @@ class App extends React.Component<Props, object> {
             <Tabs className="tab-control">
               <div className="tab-list">
                 <TabList>
-                  <Tab>Items</Tab>
-                  <Tab>Crafting</Tab>
+                  <Tab>{translate('app.tab.items')}</Tab>
+                  <Tab>{translate('app.tab.crafting')}</Tab>
+                  <Tab disabled={true}><a onClick={() => this.openUrl('http://dev.dreamcrash.org/enchantments/')}>{translate('app.tab.components')}</a></Tab>
+                  <Tab disabled={true}><a onClick={() => this.openUrl('https://discord.gg/PJ87Ewa')}>{translate('app.tab.discord')}</a></Tab>
                 </TabList>
               </div>
 
@@ -50,6 +62,10 @@ class App extends React.Component<Props, object> {
               <TabPanel>
                 <CraftingContainer />
               </TabPanel>
+
+
+              <TabPanel/>
+              <TabPanel/>
             </Tabs>
 
           </div>

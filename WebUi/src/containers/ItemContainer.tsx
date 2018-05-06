@@ -8,6 +8,7 @@ import { isEmbedded } from '../constants';
 import Spinner from '../components/Spinner';
 import OnScrollLoader from './InfiniteItemLoader';
 import { GlobalReducerState } from '../types';
+import translate from '../translations/EmbeddedTranslator';
 
 interface Props {
   items: IItem[];
@@ -60,8 +61,22 @@ class ItemContainer extends React.Component<Props, object> {
             />
           )}
 
-          <ReactTooltip id="you-can-craft-this-item-tooltip"><span>You can craft this item</span>
+          <ReactTooltip id="you-can-craft-this-item-tooltip">
+            <span>{translate('items.label.youCanCraftThisItem')}</span>
           </ReactTooltip>
+          <ReactTooltip id="cloud-ok-tooltip">
+            <span>{translate('items.label.cloudOk')}</span>
+          </ReactTooltip>
+          <ReactTooltip id="cloud-err-tooltip">
+            <span>{translate('items.label.cloudError')}</span>
+          </ReactTooltip>
+          <ReactTooltip id="triple-green-tooltip">
+            <span>{translate('items.label.tripleGreen')}</span>
+          </ReactTooltip>
+          <ReactTooltip id="double-green-tooltip">
+            <span>{translate('items.label.doubleGreen')}</span>
+          </ReactTooltip>
+
 
           <OnScrollLoader />
         </div>
@@ -70,7 +85,7 @@ class ItemContainer extends React.Component<Props, object> {
     else {
       return (
         <div className="no-items-found">
-          No items found
+          {translate('items.label.noItemsFound')}
         </div>
       );
     }

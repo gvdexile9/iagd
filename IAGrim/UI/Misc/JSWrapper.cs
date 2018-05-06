@@ -36,6 +36,11 @@ namespace IAGrim.UI.Misc {
             };
 
             var lang = GlobalSettings.Language;
+            /*
+            translation = new Dictionary<string, string> {
+                {"items.label.cloudOk", "This 32432423423 has been backed up to the cloud"}
+            };*/
+            
             translation = new HtmlTranslation {
                 iatag_html_any = lang.GetTag("iatag_html_any"),
                 iatag_html_badstate_subtitle = lang.GetTag("iatag_html_badstate_subtitle"),
@@ -87,6 +92,20 @@ namespace IAGrim.UI.Misc {
             }
         }
 
+
+        public void globalRequestRecipeComponents(string recipeRecord) {
+            OnRequestRecipeIngredients?.Invoke(this, new RequestRecipeArgument {
+                RecipeRecord = recipeRecord
+            });
+        }
+
+        public void globalRequestRecipeList() {
+            OnRequestRecipeList?.Invoke(this, null);
+        }
+
+        public void globalRequestInitialItems() {
+            OnRequestItems?.Invoke(this, null);
+        }
         public HtmlTranslation translation { get; private set; }
 
         public string Items { get; set; }
@@ -105,20 +124,6 @@ namespace IAGrim.UI.Misc {
             get {
                 return string.Empty;
             }
-        }
-
-        public void globalRequestRecipeComponents(string recipeRecord) {
-            OnRequestRecipeIngredients?.Invoke(this, new RequestRecipeArgument {
-                RecipeRecord = recipeRecord
-            });
-        }
-
-        public void globalRequestRecipeList() {
-            OnRequestRecipeList?.Invoke(this, null);
-        }
-
-        public void globalRequestInitialItems() {
-            OnRequestItems?.Invoke(this, null);
         }
     }
 }

@@ -41,6 +41,11 @@ namespace IAGrim.UI.Misc.CEF {
                 return true;
             }
 
+            else if (!request.Url.Contains("grimdawn.dreamcrash") && (request.Url.StartsWith("http://") || request.Url.StartsWith("https://"))) {
+                System.Diagnostics.Process.Start(request.Url);
+                return true;
+            }
+
             return false;
         }
 

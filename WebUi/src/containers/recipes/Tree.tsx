@@ -4,6 +4,7 @@ import CheckboxTree from 'react-checkbox-tree';
 import 'react-checkbox-tree/lib/react-checkbox-tree.css';
 import { Component } from './types';
 import './Tree.css';
+import translate from '../../translations/EmbeddedTranslator';
 
 interface Props {
   selectedRecipe: Component;
@@ -48,7 +49,7 @@ export class Tree extends React.Component<Props, {}> {
         {this.props.selectedRecipe.name !== '' &&
         <div className="crafting-container">
           <div>
-            <h3>Crafting recipe for {this.props.selectedRecipe.name}</h3>
+            <h3>{translate('crafting.header.recipeName', this.props.selectedRecipe.name)}</h3>
             <CheckboxTree
               nodes={this.state.nodes}
               checked={this.state.checked}
@@ -63,7 +64,7 @@ export class Tree extends React.Component<Props, {}> {
             />
           </div>
           <div id="itemSum">
-            <h3>You are currently lacking:</h3>
+            <h3>{translate('crafting.header.currentlyLacking')}</h3>
             <ul>
               { missingComponents.map((component) =>
                 <li key={'missing-component-' + component.label}>
