@@ -5,4 +5,5 @@ body {
 
   font-family: "verdana", "geneva", "lucida", "lucida grande", "arial", "helvetica", sans-serif;
   font-size: 12px;
+  box-sizing: border-box;
 }

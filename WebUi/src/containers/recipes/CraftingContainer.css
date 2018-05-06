@@ -8,5 +8,6 @@
   min-width: 220px;
 }
 .crafting-tab {
-  width: 100%;
+  width: 98vw;
+  background-color: #e8d5b6;
 }
