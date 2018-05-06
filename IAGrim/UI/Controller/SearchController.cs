@@ -15,6 +15,7 @@ using System.Linq;
 using IAGrim.Database;
 using IAGrim.Parsers.Arz;
 using IAGrim.Services.Crafting;
+using IAGrim.UI.Controller.dto;
 using IAGrim.UI.Misc.CEF;
 
 namespace IAGrim.UI.Controller {

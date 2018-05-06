@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using IAGrim.Database.Model;
+using IAGrim.UI.Controller.dto;
 using log4net;
 using NHibernate.Dialect.Schema;
 using StatTranslator;
@@ -31,6 +32,8 @@ namespace IAGrim.Utilities {
             };
         }
 
+
+
         private static JsonItem GetJsonItem(PlayerHeldItem item) {
             // TODO: Modifiers
 
@@ -42,13 +45,13 @@ namespace IAGrim.Utilities {
             }
 
 
-            int type;
+            ItemTypeDto type;
             if (item.IsRecipe)
-                type = 0;
+                type = ItemTypeDto.Recipe;
             else if (!string.IsNullOrEmpty(item.Stash))
-                type = 1;
+                type = ItemTypeDto.Buddy;
             else
-                type = 2;
+                type = ItemTypeDto.Player;
 
 
             

@@ -7,6 +7,7 @@ import * as ReactTooltip from 'react-tooltip';
 import { isEmbedded } from '../constants/index';
 import * as Guid from 'guid';
 import translate from '../translations/EmbeddedTranslator';
+import IItemType from '../interfaces/IItemType';
 
 const buddyIcon = require('./img/buddy.png');
 const recipeIcon = require('./img/recipe.png');
@@ -31,7 +32,7 @@ class Item extends React.Component<Props, object> {
 
   renderBuddyItem(item: IItem) {
     const tooltipId = Guid.raw();
-    if (item.type === 1) {
+    if (item.type === IItemType.Buddy) {
       if (item.buddies.length === 1) {
         return (
           <div className="buddy-item-mix">
@@ -65,7 +66,7 @@ class Item extends React.Component<Props, object> {
       console.warn(item.buddies, translate('item.buddies.plural', item.buddies.join('\n')))
     return (
       <div className="recipe-item-corner">
-        {item.type === 2 && item.hasCloudBackup &&
+        {item.type === IItemType.Player && item.hasCloudBackup &&
         <img
           className="cursor-help"
           src={cloudOkIcon}
@@ -73,14 +74,14 @@ class Item extends React.Component<Props, object> {
         />
         }
 
-        {item.type === 2 && !item.hasCloudBackup &&
+        {item.type === IItemType.Player && !item.hasCloudBackup &&
         <img
           className="cursor-help"
           src={cloudErrIcon}
           data-tip="true" data-for="cloud-err-tooltip"
         />
         }
-        {item.type !== 1 &&
+        {item.type !== IItemType.Buddy &&
         <span>
           {item.buddies.length === 1 &&
           <span>
@@ -180,7 +181,7 @@ class Item extends React.Component<Props, object> {
         </div>
         {item.buddies.length > 0 ? this.renderBuddyItem(item) : ''}
 
-        {item.hasRecipe && item.type !== 0 ?
+        {item.hasRecipe && item.type !== IItemType.Recipe ?
           <span>
             <a data-tip="true" data-for="you-can-craft-this-item-tooltip">
               <div className="recipe-item-corner">
@@ -193,7 +194,7 @@ class Item extends React.Component<Props, object> {
 
         {this.renderCornerContainer(item)}
 
-        {item.hasRecipe && item.type === 0 ?
+        {item.hasRecipe && item.type === IItemType.Recipe ?
           <div className="recipe-item">
             <img src={recipeIcon}/>
             <span className="craft-link" data-bind="click: function(item) { jumpToCraft(item.baseRecord); }">
@@ -207,14 +208,14 @@ class Item extends React.Component<Props, object> {
           <p>{translate('item.label.levelRequirement', item.level > 1 ? String(item.level) : translate('item.label.levelRequirementAny'))}</p>
         </div>
 
-        {item.numItems > 1 && item.type === 2 ?
+        {item.numItems > 1 && item.type === IItemType.Recipe ?
           <div className="link-container-all">
             <a onClick={() => this.props.transferAll(item.url)}>{translate('item.label.transferAll')} ({item.numItems})</a>
           </div>
           : ''
         }
 
-        {item.type === 2 ?
+        {item.type === IItemType.Player ?
           <div className="link-container">
             <a onClick={() => this.props.transferSingle(item.url)}>{translate('item.label.transferSingle')}</a>
           </div>
