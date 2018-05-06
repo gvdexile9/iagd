@@ -1,6 +1,5 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import { IntlProvider } from 'react-intl';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import './index.css';
@@ -36,11 +35,8 @@ if (typeof data === 'object') {
 }
 /* == END MAGIC == */
 
-const locale = 'en';
 ReactDOM.render(
-  <IntlProvider locale={locale}>
-    <App store={store} />
-  </IntlProvider>,
+  <App store={store} />,
   document.getElementById('root') as HTMLElement
 );
 registerServiceWorker();
