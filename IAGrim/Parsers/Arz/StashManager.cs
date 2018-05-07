@@ -259,7 +259,6 @@ namespace IAGrim.Parsers.Arz {
                         .Where(m => m.StackCount <= 1)
                         .Where(m => !_playerItemDao.Exists(Map(m, stash.ModLabel, isHardcore, stash.IsExpansion1)))
                         .ToList();
-                    
 
 
                     stash.Tabs[lootFromIndex].Items.RemoveAll(e => items.Any(m => m.Equals(e)));
