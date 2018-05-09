@@ -50,7 +50,8 @@ class EmbeddedTranslator {
     'item.label.transferSingle': 'Transfer',
     'item.label.transferAll': 'Transfer All',
     'crafting.header.recipeName': 'Crafting recipe for {0}',
-    'crafting.header.currentlyLacking': 'You are currently lacking:'
+    'crafting.header.currentlyLacking': 'You are currently lacking:',
+    'item.augmentPurchasable': 'You may be able to purchase this augment from {0}'
   };
 
   public translate(id: string): string {

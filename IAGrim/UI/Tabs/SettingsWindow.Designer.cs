@@ -27,16 +27,13 @@
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.copyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.panelBox6 = new PanelBox();
-            this.firefoxCheckBox1 = new FirefoxCheckBox();
-            this.cbInstaTransfer = new FirefoxCheckBox();
-            this.linkLabel2 = new System.Windows.Forms.LinkLabel();
-            this.cbInstalootEnabled = new FirefoxCheckBox();
             this.panelBox5 = new PanelBox();
             this.labelNumItems = new System.Windows.Forms.Label();
             this.labelLastUpdated = new System.Windows.Forms.Label();
             this.labelLastPatch = new System.Windows.Forms.Label();
             this.panelBox4 = new PanelBox();
+            this.cbShowAugments = new FirefoxCheckBox();
+            this.cbDualComputer = new FirefoxCheckBox();
             this.linkSourceCode = new System.Windows.Forms.LinkLabel();
             this.cbDisplaySkills = new FirefoxCheckBox();
             this.cbAutoUpdateModSettings = new FirefoxCheckBox();
@@ -60,9 +57,7 @@
             this.buttonLanguageSelect = new FirefoxButton();
             this.buttonViewBackups = new FirefoxButton();
             this.buttonViewLogs = new FirefoxButton();
-            this.cbDualComputer = new FirefoxCheckBox();
             this.contextMenuStrip1.SuspendLayout();
-            this.panelBox6.SuspendLayout();
             this.panelBox5.SuspendLayout();
             this.panelBox4.SuspendLayout();
             this.panelBox3.SuspendLayout();
@@ -76,7 +71,7 @@
             this.linkLabel1.AutoSize = true;
             this.linkLabel1.ContextMenuStrip = this.contextMenuStrip1;
             this.linkLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.linkLabel1.Location = new System.Drawing.Point(853, 469);
+            this.linkLabel1.Location = new System.Drawing.Point(789, 469);
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.Size = new System.Drawing.Size(75, 33);
             this.linkLabel1.TabIndex = 20;
@@ -98,80 +93,6 @@
             this.copyToolStripMenuItem.Size = new System.Drawing.Size(102, 22);
             this.copyToolStripMenuItem.Text = "Copy";
             this.copyToolStripMenuItem.Click += new System.EventHandler(this.copyToolStripMenuItem_Click);
-            // 
-            // panelBox6
-            // 
-            this.panelBox6.Controls.Add(this.firefoxCheckBox1);
-            this.panelBox6.Controls.Add(this.cbInstaTransfer);
-            this.panelBox6.Controls.Add(this.linkLabel2);
-            this.panelBox6.Controls.Add(this.cbInstalootEnabled);
-            this.panelBox6.Font = new System.Drawing.Font("Segoe UI Semibold", 20F);
-            this.panelBox6.HeaderHeight = 40;
-            this.panelBox6.Location = new System.Drawing.Point(700, 12);
-            this.panelBox6.Name = "panelBox6";
-            this.panelBox6.NoRounding = false;
-            this.panelBox6.Size = new System.Drawing.Size(206, 385);
-            this.panelBox6.TabIndex = 6;
-            this.panelBox6.Tag = "iatag_ui_experimental";
-            this.panelBox6.Text = "Experimental";
-            this.panelBox6.TextLocation = "8; 5";
-            // 
-            // firefoxCheckBox1
-            // 
-            this.firefoxCheckBox1.Bold = false;
-            this.firefoxCheckBox1.EnabledCalc = true;
-            this.firefoxCheckBox1.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.firefoxCheckBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(78)))), ((int)(((byte)(90)))));
-            this.firefoxCheckBox1.Location = new System.Drawing.Point(3, 120);
-            this.firefoxCheckBox1.Name = "firefoxCheckBox1";
-            this.firefoxCheckBox1.Size = new System.Drawing.Size(178, 27);
-            this.firefoxCheckBox1.TabIndex = 19;
-            this.firefoxCheckBox1.Tag = "iatag_ui_v1_0_40_0_hotfix";
-            this.firefoxCheckBox1.Text = "v1.0.40.0 hotfix";
-            this.firefoxCheckBox1.Visible = false;
-            this.firefoxCheckBox1.CheckedChanged += new System.EventHandler(this.firefoxCheckBox1_CheckedChanged);
-            // 
-            // cbInstaTransfer
-            // 
-            this.cbInstaTransfer.Bold = false;
-            this.cbInstaTransfer.EnabledCalc = true;
-            this.cbInstaTransfer.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.cbInstaTransfer.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(78)))), ((int)(((byte)(90)))));
-            this.cbInstaTransfer.Location = new System.Drawing.Point(3, 87);
-            this.cbInstaTransfer.Name = "cbInstaTransfer";
-            this.cbInstaTransfer.Size = new System.Drawing.Size(178, 27);
-            this.cbInstaTransfer.TabIndex = 18;
-            this.cbInstaTransfer.Tag = "iatag_ui_instatransfer";
-            this.cbInstaTransfer.Text = "InstaTransfer";
-            this.cbInstaTransfer.Visible = false;
-            this.cbInstaTransfer.CheckedChanged += new System.EventHandler(this.cbInstaTransfer_CheckedChanged);
-            // 
-            // linkLabel2
-            // 
-            this.linkLabel2.AutoSize = true;
-            this.linkLabel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.linkLabel2.Location = new System.Drawing.Point(147, 61);
-            this.linkLabel2.Name = "linkLabel2";
-            this.linkLabel2.Size = new System.Drawing.Size(45, 13);
-            this.linkLabel2.TabIndex = 17;
-            this.linkLabel2.TabStop = true;
-            this.linkLabel2.Tag = "iatag_ui_details";
-            this.linkLabel2.Text = "Details..";
-            this.linkLabel2.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel2_LinkClicked);
-            // 
-            // cbInstalootEnabled
-            // 
-            this.cbInstalootEnabled.Bold = false;
-            this.cbInstalootEnabled.EnabledCalc = true;
-            this.cbInstalootEnabled.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.cbInstalootEnabled.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(78)))), ((int)(((byte)(90)))));
-            this.cbInstalootEnabled.Location = new System.Drawing.Point(3, 54);
-            this.cbInstalootEnabled.Name = "cbInstalootEnabled";
-            this.cbInstalootEnabled.Size = new System.Drawing.Size(178, 27);
-            this.cbInstalootEnabled.TabIndex = 16;
-            this.cbInstalootEnabled.Tag = "iatag_ui_instaloot";
-            this.cbInstalootEnabled.Text = "Instaloot";
-            this.cbInstalootEnabled.CheckedChanged += new System.EventHandler(this.cbInstalootDisabled_CheckedChanged);
             // 
             // panelBox5
             // 
@@ -225,6 +146,7 @@
             // 
             // panelBox4
             // 
+            this.panelBox4.Controls.Add(this.cbShowAugments);
             this.panelBox4.Controls.Add(this.cbDualComputer);
             this.panelBox4.Controls.Add(this.linkSourceCode);
             this.panelBox4.Controls.Add(this.cbDisplaySkills);
@@ -240,18 +162,46 @@
             this.panelBox4.Location = new System.Drawing.Point(496, 12);
             this.panelBox4.Name = "panelBox4";
             this.panelBox4.NoRounding = false;
-            this.panelBox4.Size = new System.Drawing.Size(198, 385);
+            this.panelBox4.Size = new System.Drawing.Size(287, 490);
             this.panelBox4.TabIndex = 8;
             this.panelBox4.Tag = "iatag_ui_settings_title";
             this.panelBox4.Text = "Settings";
             this.panelBox4.TextLocation = "8; 5";
+            // 
+            // cbShowAugments
+            // 
+            this.cbShowAugments.Bold = false;
+            this.cbShowAugments.EnabledCalc = true;
+            this.cbShowAugments.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.cbShowAugments.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(78)))), ((int)(((byte)(90)))));
+            this.cbShowAugments.Location = new System.Drawing.Point(3, 252);
+            this.cbShowAugments.Name = "cbShowAugments";
+            this.cbShowAugments.Size = new System.Drawing.Size(268, 27);
+            this.cbShowAugments.TabIndex = 23;
+            this.cbShowAugments.Tag = "iatag_ui_showaugments";
+            this.cbShowAugments.Text = "Show augments as Items";
+            this.cbShowAugments.CheckedChanged += new System.EventHandler(this.cbShowAugments_CheckedChanged);
+            // 
+            // cbDualComputer
+            // 
+            this.cbDualComputer.Bold = false;
+            this.cbDualComputer.EnabledCalc = true;
+            this.cbDualComputer.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.cbDualComputer.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(78)))), ((int)(((byte)(90)))));
+            this.cbDualComputer.Location = new System.Drawing.Point(3, 285);
+            this.cbDualComputer.Name = "cbDualComputer";
+            this.cbDualComputer.Size = new System.Drawing.Size(236, 27);
+            this.cbDualComputer.TabIndex = 22;
+            this.cbDualComputer.Tag = "iatag_ui_dualcomputer";
+            this.cbDualComputer.Text = "Using IA on multiple PCs";
+            this.cbDualComputer.CheckedChanged += new System.EventHandler(this.cbDualComputer_CheckedChanged);
             // 
             // linkSourceCode
             // 
             this.linkSourceCode.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.linkSourceCode.AutoSize = true;
             this.linkSourceCode.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.linkSourceCode.Location = new System.Drawing.Point(5, 363);
+            this.linkSourceCode.Location = new System.Drawing.Point(5, 468);
             this.linkSourceCode.Name = "linkSourceCode";
             this.linkSourceCode.Size = new System.Drawing.Size(68, 13);
             this.linkSourceCode.TabIndex = 21;
@@ -280,7 +230,7 @@
             this.cbAutoUpdateModSettings.EnabledCalc = true;
             this.cbAutoUpdateModSettings.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Strikeout, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbAutoUpdateModSettings.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(78)))), ((int)(((byte)(90)))));
-            this.cbAutoUpdateModSettings.Location = new System.Drawing.Point(3, 339);
+            this.cbAutoUpdateModSettings.Location = new System.Drawing.Point(3, 436);
             this.cbAutoUpdateModSettings.Name = "cbAutoUpdateModSettings";
             this.cbAutoUpdateModSettings.Size = new System.Drawing.Size(132, 27);
             this.cbAutoUpdateModSettings.TabIndex = 15;
@@ -350,7 +300,7 @@
             this.cbMergeDuplicates.EnabledCalc = true;
             this.cbMergeDuplicates.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.cbMergeDuplicates.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(78)))), ((int)(((byte)(90)))));
-            this.cbMergeDuplicates.Location = new System.Drawing.Point(3, 306);
+            this.cbMergeDuplicates.Location = new System.Drawing.Point(3, 403);
             this.cbMergeDuplicates.Name = "cbMergeDuplicates";
             this.cbMergeDuplicates.Size = new System.Drawing.Size(160, 27);
             this.cbMergeDuplicates.TabIndex = 9;
@@ -565,26 +515,11 @@
             this.buttonViewLogs.Text = "View Logs";
             this.buttonViewLogs.Click += new System.EventHandler(this.buttonViewLogs_Click);
             // 
-            // cbDualComputer
-            // 
-            this.cbDualComputer.Bold = false;
-            this.cbDualComputer.EnabledCalc = true;
-            this.cbDualComputer.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.cbDualComputer.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(78)))), ((int)(((byte)(90)))));
-            this.cbDualComputer.Location = new System.Drawing.Point(3, 252);
-            this.cbDualComputer.Name = "cbDualComputer";
-            this.cbDualComputer.Size = new System.Drawing.Size(192, 27);
-            this.cbDualComputer.TabIndex = 22;
-            this.cbDualComputer.Tag = "iatag_ui_dualcomputer";
-            this.cbDualComputer.Text = "Using IA on multiple PCs";
-            this.cbDualComputer.CheckedChanged += new System.EventHandler(this.cbDualComputer_CheckedChanged);
-            // 
             // SettingsWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(940, 511);
-            this.Controls.Add(this.panelBox6);
+            this.ClientSize = new System.Drawing.Size(876, 511);
             this.Controls.Add(this.linkLabel1);
             this.Controls.Add(this.panelBox5);
             this.Controls.Add(this.panelBox4);
@@ -600,8 +535,6 @@
             this.Text = "Settings";
             this.Load += new System.EventHandler(this.SettingsWindow_Load);
             this.contextMenuStrip1.ResumeLayout(false);
-            this.panelBox6.ResumeLayout(false);
-            this.panelBox6.PerformLayout();
             this.panelBox5.ResumeLayout(false);
             this.panelBox5.PerformLayout();
             this.panelBox4.ResumeLayout(false);
@@ -641,17 +574,13 @@
         private FirefoxCheckBox cbAutoUpdateModSettings;
         private PanelBox panelBox4;
         private FirefoxButton buttonLanguageSelect;
-        private PanelBox panelBox6;
         private FirefoxButton buttonMigratePostgres;
-        private System.Windows.Forms.LinkLabel linkLabel2;
-        private FirefoxCheckBox cbInstalootEnabled;
-        private FirefoxCheckBox cbInstaTransfer;
         private FirefoxCheckBox cbAutoSearch;
         private FirefoxButton buttonImportExport;
         private FirefoxCheckBox cbDisplaySkills;
         private FirefoxButton buttonAdvancedSettings;
         private System.Windows.Forms.LinkLabel linkSourceCode;
-        private FirefoxCheckBox firefoxCheckBox1;
         private FirefoxCheckBox cbDualComputer;
+        private FirefoxCheckBox cbShowAugments;
     }
 }

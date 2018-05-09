@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using IAGrim.Database.DAO.Util;
 using IAGrim.Database.Model;
 using IAGrim.UI.Controller.dto;
 using log4net;
@@ -46,15 +47,27 @@ namespace IAGrim.Utilities {
 
 
             ItemTypeDto type;
-            if (item.IsRecipe)
+            string extras = string.Empty;
+
+            if (item.IsRecipe) {
                 type = ItemTypeDto.Recipe;
-            else if (!string.IsNullOrEmpty(item.Stash))
+            }
+            else if (!string.IsNullOrEmpty(item.Stash)) {
                 type = ItemTypeDto.Buddy;
-            else
+            }
+            else if (item is PlayerItem) {
                 type = ItemTypeDto.Player;
+            }
+            else if (item is AugmentationItem) {
+                type = ItemTypeDto.Augmentation;
+                extras = ItemOperationsUtility.TranslateFaction(((AugmentationItem) item).Tags.FirstOrDefault(m => m.Stat == "factionSource")?.TextValue ?? string.Empty);
+            }
+            else {
+                type = ItemTypeDto.Unknown;
+            }
 
 
-            
+
             var json = new JsonItem {
                 BaseRecord = item.BaseRecord,
                 URL = id,
@@ -73,7 +86,8 @@ namespace IAGrim.Utilities {
                 Skill = item.Skill != null ? GetJsonSkill(item.Skill) : null,
                 GreenRarity = item.PrefixRarity,
                 HasCloudBackup = isCloudSynced,
-                Slot = SlotTranslator.Translate(item.Slot ?? "")
+                Slot = SlotTranslator.Translate(item.Slot ?? ""),
+                Extras = extras
             };
 
             var modifiedSkills = item.ModifiedSkills;

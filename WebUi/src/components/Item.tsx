@@ -13,6 +13,7 @@ const buddyIcon = require('./img/buddy.png');
 const recipeIcon = require('./img/recipe.png');
 const cloudErrIcon = require('./img/cloud-err.png');
 const cloudOkIcon = require('./img/cloud-ok.png');
+const purchaseableItem = require('./img/gold-coins-sm.png');
 
 interface Props {
   item: IItem;
@@ -63,9 +64,33 @@ class Item extends React.Component<Props, object> {
   renderCornerContainer(item: IItem) {
     const buddyTooltip = Guid.raw();
 
+    // purchaseableItem
+
+    const showCloudOkIcon = item.type === IItemType.Player && item.hasCloudBackup;
+    const showCloudErrorIcon = item.type === IItemType.Player && !item.hasCloudBackup;
+    const showSingularBuddyItemIcon = item.type !== IItemType.Buddy && item.buddies.length === 1;
+    const showPluralBuddyItemIcon = item.type !== IItemType.Buddy && item.buddies.length > 1;
+    const showRecipeIcon = item.hasRecipe && item.type !== 0;
+    const showAugmentationIcon = item.type === IItemType.Augmentation;
+
+    let augmentationTooltip = Guid.raw();
+
     return (
       <div className="recipe-item-corner">
-        {item.type === IItemType.Player && item.hasCloudBackup &&
+        {showAugmentationIcon &&
+        <span>
+          <img
+            className="cursor-help"
+            src={purchaseableItem}
+            data-tip="true"
+            data-for={augmentationTooltip}
+          />
+
+          <ReactTooltip id={augmentationTooltip}><span>{translate('item.augmentPurchasable', item.extras)}</span></ReactTooltip>
+        </span>
+        }
+
+        {showCloudOkIcon &&
           <img
             className="cursor-help"
             src={cloudOkIcon}
@@ -74,7 +99,7 @@ class Item extends React.Component<Props, object> {
           />
         }
 
-        {item.type === IItemType.Player && !item.hasCloudBackup &&
+        {showCloudErrorIcon &&
         <img
           className="cursor-help"
           src={cloudErrIcon}
@@ -82,10 +107,9 @@ class Item extends React.Component<Props, object> {
           data-for="cloud-err-tooltip"
         />
         }
-        {item.type !== IItemType.Buddy &&
+
+        {showSingularBuddyItemIcon &&
         <span>
-          {item.buddies.length === 1 &&
-          <span>
             <img
               className="cursor-help"
               src={buddyIcon}
@@ -96,10 +120,10 @@ class Item extends React.Component<Props, object> {
               <span>{translate('item.buddies.singular', item.buddies[0])}</span>
             </ReactTooltip>
           </span>
-          }
+        }
 
-          {item.buddies.length > 1 &&
-          <span>
+        {showPluralBuddyItemIcon &&
+        <span>
             <img
               className="cursor-help"
               src={buddyIcon}
@@ -110,10 +134,9 @@ class Item extends React.Component<Props, object> {
               <span>{translate('item.buddies.plural', item.buddies.join('\n'))}</span>
             </ReactTooltip>
             </span>
-          }
-        </span>
         }
-        {item.hasRecipe && item.type !== 0 &&
+
+        {showRecipeIcon &&
         <span data-tip="true" data-for="you-can-craft-this-item-tooltip">
           <img
             className="cursor-help"

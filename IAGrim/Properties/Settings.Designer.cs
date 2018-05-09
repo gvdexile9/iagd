@@ -409,30 +409,6 @@ namespace IAGrim.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public int InstalootSetting {
-            get {
-                return ((int)(this["InstalootSetting"]));
-            }
-            set {
-                this["InstalootSetting"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool Hotfix1_0_4_0_active {
-            get {
-                return ((bool)(this["Hotfix1_0_4_0_active"]));
-            }
-            set {
-                this["Hotfix1_0_4_0_active"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string AzureAuthToken {
             get {
@@ -452,6 +428,18 @@ namespace IAGrim.Properties {
             }
             set {
                 this["UsingDualComputer"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ShowAugmentsAsItems {
+            get {
+                return ((bool)(this["ShowAugmentsAsItems"]));
+            }
+            set {
+                this["ShowAugmentsAsItems"] = value;
             }
         }
     }

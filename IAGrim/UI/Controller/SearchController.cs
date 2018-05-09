@@ -13,6 +13,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using IAGrim.Database;
+using IAGrim.Database.Synchronizer;
 using IAGrim.Parsers.Arz;
 using IAGrim.Services.Crafting;
 using IAGrim.UI.Controller.dto;
@@ -32,6 +33,7 @@ namespace IAGrim.UI.Controller {
         private readonly CostCalculationService _costCalculationService;
         private string _previousMod = string.Empty;
         private readonly StashManager _stashManager;
+        private readonly AugmentationItemRepo _augmentationItemRepo;
 
         public CefBrowserHandler Browser;
 
@@ -47,7 +49,8 @@ namespace IAGrim.UI.Controller {
             IDatabaseItemStatDao databaseItemStatDao,
             IItemSkillDao itemSkillDao,
             IBuddyItemDao buddyItemDao,
-            StashManager stashManager
+            StashManager stashManager, 
+            AugmentationItemRepo augmentationItemRepo
         ) {
             this._dbItemDao = databaseItemDao;
             this._playerItemDao = playerItemDao;
@@ -57,6 +60,7 @@ namespace IAGrim.UI.Controller {
             this._costCalculationService = new CostCalculationService(playerItemDao, stashManager);
             this._buddyItemDao = buddyItemDao;
             this._stashManager = stashManager;
+            this._augmentationItemRepo = augmentationItemRepo;
 
 
             // Just make sure it writes .css/.html files before displaying anything to the browser
@@ -188,6 +192,12 @@ namespace IAGrim.UI.Controller {
                 AddRecipeItems(items, query);
             }
 
+            if ((bool)Properties.Settings.Default.ShowAugmentsAsItems && !query.SocketedOnly) {
+                AddAugmentItems(items, query);
+            }
+
+            
+
             _itemPaginatorService.Update(items, orderByLevel);
             
 
@@ -236,6 +246,12 @@ namespace IAGrim.UI.Controller {
             else {
                 message = string.Empty;
             }
+        }
+
+        private void AddAugmentItems(List<PlayerHeldItem> items, Search query) {
+            var augments = _augmentationItemRepo.Search(query);
+            var remainingRecipes = augments.Where(recipe => items.All(item => item.BaseRecord != recipe.BaseRecord));
+            items.AddRange(remainingRecipes);
         }
 
         private void AddRecipeItems(List<PlayerHeldItem> items, Search query) {

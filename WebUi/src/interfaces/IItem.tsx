@@ -21,5 +21,6 @@ export default interface IItem {
   skill: ISkill | null;
   hasCloudBackup?: boolean; // TODO: Should be mandatory, optional due to test data not including it
   slot?: string; // TODO: See above
+  extras?: string | undefined;
 }
 

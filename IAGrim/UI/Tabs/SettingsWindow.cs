@@ -64,12 +64,9 @@ namespace IAGrim.UI {
             _controller.BindCheckbox(cbShowRecipesAsItems);
             _controller.BindCheckbox(cbAutoUpdateModSettings);
             //_controller.BindCheckbox(cbInstalootDisabled);
-            _controller.BindCheckbox(cbInstaTransfer);
             _controller.BindCheckbox(cbAutoSearch);
             _controller.BindCheckbox(cbDisplaySkills);
             _controller.LoadDefaults();
-
-            cbInstalootEnabled.Checked = (InstalootSettingType)Properties.Settings.Default.InstalootSetting == InstalootSettingType.Enabled;
         }
 
         private void SettingsWindow_Load(object sender, EventArgs e) {
@@ -99,8 +96,8 @@ namespace IAGrim.UI {
 
             radioBeta.Checked = (bool)Properties.Settings.Default.SubscribeExperimentalUpdates;
             radioRelease.Checked = !(bool)Properties.Settings.Default.SubscribeExperimentalUpdates;
-            firefoxCheckBox1.Checked = Properties.Settings.Default.Hotfix1_0_4_0_active;
-            //controller.LoadDefaults();
+            cbDualComputer.Checked = Properties.Settings.Default.UsingDualComputer;
+            cbShowAugments.Checked = Properties.Settings.Default.ShowAugmentsAsItems;
 
         }
 
@@ -177,11 +174,6 @@ namespace IAGrim.UI {
         }
 
 
-        private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) {
-            if (e.Button == MouseButtons.Left)
-                Process.Start("http://grimdawn.dreamcrash.org/ia/experimental.html#instaloot");
-        }
-
         private void buttonImportExport_Click(object sender, EventArgs e) {
             new Popups.ImportExport.ImportExportContainer(_modFilter, _playerItemDao, _stashManager).ShowDialog();
         }
@@ -198,24 +190,15 @@ namespace IAGrim.UI {
             Process.Start("https://github.com/marius00/iagd");
         }
 
-        private void cbInstalootDisabled_CheckedChanged(object sender, EventArgs e) {
-            Properties.Settings.Default.InstalootSetting = (int)(cbInstalootEnabled.Checked ? InstalootSettingType.Enabled : InstalootSettingType.Disabled);
-            Properties.Settings.Default.Save();
-        }
-
-        private void cbInstaTransfer_CheckedChanged(object sender, EventArgs e) {
-
-        }
-
-        private void firefoxCheckBox1_CheckedChanged(object sender, EventArgs e) {
-            Properties.Settings.Default.Hotfix1_0_4_0_active = firefoxCheckBox1.Checked;
-            Properties.Settings.Default.Save();
-        }
 
         private void cbDualComputer_CheckedChanged(object sender, EventArgs e) {
             Properties.Settings.Default.UsingDualComputer = (sender as FirefoxCheckBox).Checked;
             Properties.Settings.Default.Save();
-            
+        }
+
+        private void cbShowAugments_CheckedChanged(object sender, EventArgs e) {
+            Properties.Settings.Default.ShowAugmentsAsItems = (sender as FirefoxCheckBox).Checked;
+            Properties.Settings.Default.Save();
         }
     }
 }
